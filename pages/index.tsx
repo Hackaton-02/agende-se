@@ -1,6 +1,7 @@
 import Auth from 'components/Auth'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home: NextPage = () => {
   return (

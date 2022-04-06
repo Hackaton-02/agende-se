@@ -46,6 +46,11 @@ export const Wrapper = styled.div`
       }
     }
 
+    .invalid-feedback {
+      text-align: center;
+      width: 85% !important;
+    }
+
     @keyframes shake {
       25% {
         transform: translateX(4px);
@@ -98,6 +103,7 @@ export const FieldsContainer = styled.div`
   ${({ theme }) => css`
     width: 703px;
     min-height: 370px;
+    height: auto;
     background: ${theme.colors.white};
     position: absolute;
     width: 645px;
@@ -108,6 +114,13 @@ export const FieldsContainer = styled.div`
       text-align: center;
       cursor: pointer;
       margin-bottom: 10px;
+      margin-top: 20px;
+    }
+    &.paragraph {
+
+      & p {
+        display: none;
+      }
     }
   `}
 `

@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
+type BtnProps = {
+  isSignup: boolean
+}
+
+export const Wrapper = styled.div<BtnProps>`
+  ${({ theme, isSignup }) => css`
     align-items: center;
     background: ${theme.colors.primary};
     border-radius: 40px;
@@ -10,12 +14,27 @@ export const Wrapper = styled.div`
     display: flex;
     height: 50px;
     justify-content: center;
-    position: relative;
     width: 482px;
     max-width: 70%;
-    margin: 35px auto;
     cursor: pointer;
+    border: none;
+    margin-top: 30px;
 
+    &.activebtn {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      filter: brightness(1.2);
+      background: ${theme.colors.primary} !important;
+      border: none;
+    }
+
+    &:focus {
+      background: ${theme.colors.primary} !important;
+      border: none !important;
+    }
     .text {
       color: ${theme.colors.white};
       font-weight: 700;
@@ -53,39 +72,40 @@ export const Wrapper = styled.div`
     .ok {
       opacity: 0;
     }
-    &.active {
+    &.activebtn {
       animation: 6s Container;
       height: 75px;
     }
-    &.active .text {
+    &.activebtn .text {
       opacity: 0;
       animation: 6s Text forwards;
     }
-    &.active .fingerprint {
+
+    &.activebtn .fingerprint {
       opacity: 1;
       transition: opacity 300ms 200ms;
     }
-    &.active .fingerprint-base .odd {
+    &.activebtn .fingerprint-base .odd {
       stroke-dasharray: 50px 50px;
       transition: stroke-dasharray 800ms 100ms;
     }
-    &.active .fingerprint-base .even {
+    &.activebtn .fingerprint-base .even {
       stroke-dashoffset: 0px;
       transition: stroke-dashoffset 800ms;
     }
-    &.active .fingerprint-active .odd {
+    &.activebtn .fingerprint-active .odd {
       stroke-dasharray: 50px 50px;
       transition: stroke-dasharray 2000ms 1500ms;
     }
-    &.active .fingerprint-active .even {
+    &.activebtn .fingerprint-active .even {
       stroke-dashoffset: 0px;
       transition: stroke-dashoffset 2000ms 1300ms;
     }
-    &.active .fingerprint-out {
+    &.activebtn .fingerprint-out {
       opacity: 0;
       transition: opacity 300ms 4100ms;
     }
-    &.active .ok {
+    &.activebtn .ok {
       opacity: 1;
       animation: 6s Ok forwards;
     }
@@ -95,6 +115,9 @@ export const Wrapper = styled.div`
       }
       6% {
         width: 80px;
+        /* position: absolute;
+        top: ${isSignup ? '168%' : '80%'};
+        left: 43.5%; */
       }
       71% {
         transform: scale(1);
@@ -108,6 +131,9 @@ export const Wrapper = styled.div`
 
       94% {
         width: 80px;
+        /* position: absolute;
+        top: ${isSignup ? '168%' : '80%'};
+        left: 43.5%; */
       }
       100% {
         width: 482px;

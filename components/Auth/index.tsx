@@ -1,7 +1,7 @@
-import Fields from 'components/Fields'
+import { Fields } from 'components/Fields'
 import LoginBtn from 'components/LoginBtn'
 import { useState } from 'react'
-import { Row } from 'react-bootstrap'
+import { Form, Row } from 'react-bootstrap'
 import * as S from './styles'
 
 export const EmailPassword = (
@@ -11,16 +11,16 @@ export const EmailPassword = (
   isPassRequired: boolean
 ) => ({
   email: {
-    helperText: 'invalid email',
+    helperText: 'email inválido ou obrigatório',
     placeholder: 'Insira seu email',
     type: 'email',
+    required: true,
     hidden: hideEmail,
-    label: 'Email',
-    required: true
+    label: 'Email'
   },
   password: {
     helperText:
-      'your password must be at least eight characters and include one uppercase letter, one number, and one special character',
+      'A senha é obrigatória',
     placeholder: 'Insira sua senha',
     type: 'password',
     hidden: hidePassword,
@@ -30,6 +30,8 @@ export const EmailPassword = (
 })
 
 const Auth = () => {
+  const [validated, setValidated] = useState(false);
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -43,20 +45,35 @@ const Auth = () => {
 
   const newFields = {
     name: {
-      helperText: 'you must enter a name',
+      helperText: 'O campo nome é obrigatório',
       placeholder: 'Insira nome de usuário',
-      label: 'Usuário'
+      label: 'Usuário',
+      required: true
     },
     email,
     password,
     confirmation: {
       ...password,
       placeholder: 'Confirme sua senha',
-      label: 'Confirmar Senha'
+      label: 'Confirmar Senha',
+      helperText: 'A confirmação da senha é obrigatória'
     }
   }
 
   const fields = isSignup ? newFields : commom
+
+  const handleSubmit = (event: { currentTarget: any; preventDefault: () => void; stopPropagation: () => void }) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
+  const form = document.querySelector("form")
+  const isValid = form?.checkValidity()
 
   return (
     <>
@@ -69,7 +86,7 @@ const Auth = () => {
           <p>Faça login para continuar no Agende-se</p>
         </S.TextContainer>
         <S.FieldsContainer>
-          <form>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row>
               <Fields
                 values={values}
@@ -77,16 +94,20 @@ const Auth = () => {
                 disabled={false}
                 fields={fields}
               />
-              <LoginBtn />
+
+            </Row>
+            <LoginBtn isValid={isValid!} isSignup={isSignup} />
               <p
+              className='link-text'
                 onClick={() => {
                   setIsSignup(!isSignup)
+                  setValidated(false);
+
                 }}
               >
-                Já tenho uma conta
+              {isSignup ? "Já tenho uma conta" : "Não tenho uma conta"}
               </p>
-            </Row>
-          </form>
+          </Form>
         </S.FieldsContainer>
       </S.Wrapper>
     </>
