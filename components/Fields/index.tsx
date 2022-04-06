@@ -1,42 +1,50 @@
-import { Col, FormControl, FormLabel, InputGroup, Row } from 'react-bootstrap'
+import { Field } from 'dtos/Fields'
+import { Dispatch, SetStateAction } from 'react'
+import { Col, Form, FormControl, FormLabel, InputGroup } from 'react-bootstrap'
 
 type Fields = {
-  fields: object
+  fields: Partial<Field>
   values?: object
-  setValues?: any
+  setValues: Dispatch<
+    SetStateAction<{
+      name: string
+      email: string
+      password: string
+      confirmation: string
+    }>
+  >
   disabled: boolean
   handleSubmit?: any
 }
-export default function Fields({
+export const Fields: any = ({
   fields,
   values,
   setValues,
   disabled,
   handleSubmit
-}: Fields) {
-  return Object.keys(fields).map((field: unknown) => {
+}: Fields) => {
+  return Object.keys(fields).map((field: unknown, i) => {
     return !fields[field].hidden ? (
-      <Col
-        lg={{ span: 6, offset: 3 }}
-        md={{ span: 8, offset: 2 }}
-        key={fields[field].label}
-      >
-        <InputGroup className="mt-3">
-          <FormLabel as={Col} lg={12}>
+      <Col key={fields[field].label}>
+        <Form.Group className="mx-auto" controlId={`validationCustom${i}`}>
+          <Form.Label as={Col} lg={12}>
             {fields[field].label}
-          </FormLabel>
-          <FormControl
+          </Form.Label>
+          <Form.Control
+            required={fields[field].required}
             value={values ? values[field] : undefined}
             disabled={disabled}
-            name={fields[field].name}
+            //  name={fields[field].name}
             onChange={e => {
               setValues({ ...values, [field]: e.target.value })
             }}
             type={fields[field].type}
             placeholder={fields[field].placeholder}
-            required={fields[field].required}
           />
-        </InputGroup>
+          <Form.Control.Feedback type="invalid" className="mx-auto">
+            {fields[field].helperText}
+          </Form.Control.Feedback>
+        </Form.Group>
       </Col>
     ) : undefined
   })

@@ -1,20 +1,36 @@
 import * as S from './styles'
 import { useRouter } from 'next/router'
+import { Button } from 'react-bootstrap'
+import { FieldsContainer } from 'components/Auth/styles'
 
-const LoginBtn = () => {
+type LoginBtnProps = {
+  isSignup: boolean
+  isValid: boolean
+}
+
+const LoginBtn: React.FC<LoginBtnProps> = ({ isSignup, isValid }) => {
   const router = useRouter()
 
   return (
     <S.Wrapper
-      className="container"
+      className="container mx-auto"
+      as={Button}
+      isSignup={isSignup}
+      type="submit"
       onAnimationEnd={() => {
         const container = document.querySelector('.container')!
-        container.classList.remove('active')
-        router.push('/Dashboard')
+        const p = document.querySelector(`${FieldsContainer}`)
+        container.classList.remove('activebtn')
+        p?.classList.remove('paragraph')
+        //router.push('/Dashboard')
       }}
-      onClick={e => {
+      onClick={(e: { preventDefault: () => void }) => {
+        if (!isValid) return
+        e.preventDefault()
         const container = document.querySelector('.container')!
-        container.classList.toggle('active')
+        const p = document.querySelector(`${FieldsContainer}`)
+        p?.classList.toggle('paragraph')
+        container.classList.toggle('activebtn')
       }}
     >
       <span className="text">Entrar </span>
