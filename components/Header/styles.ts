@@ -21,14 +21,15 @@ export const HeaderContainer = styled.div<HeaderProps>`
       font-weight: 600;
       font-size: 35px;
       line-height: 42px;
-      color: ${theme.colors.primary};
+      color: ${theme.colors.white};
       position: absolute;
+      padding:
     }
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px 45px;
-    background-color: ${theme.colors.navbar};
+    background-color: ${theme.colors.secondary};
     ${media.greaterThan('medium')`
     ${isSpaced ? wrapperModifiers.around : wrapperModifiers.between}
     `}

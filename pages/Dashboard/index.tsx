@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
         <Logo size="small" /> <div className="text-logo">Agende-se</div>
         <LoggedInUser>
           <span className="logout">Logout</span>
-          <img src="avatar.svg" /> <span>{'John Smith'}</span>
+          <img src="avatar.svg" /> <span className='avatarName'>{'John Smith'}</span>
         </LoggedInUser>
       </Header>
       <Menu />
