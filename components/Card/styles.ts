@@ -13,7 +13,7 @@ const wrapperModifiers = {
 
 export const CardContainer = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightPrimary};
+    background-color: ${theme.colors.primary};
     border-radius: 12px;
     width: 360px;
     height: 200px;

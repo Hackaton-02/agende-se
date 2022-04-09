@@ -17,7 +17,7 @@ const Menu: React.FC = () => {
         <Col lg="auto">
           <DashIcon
             color={
-              router.pathname === '/Dashboard' ? theme.colors.blue : undefined
+              router.pathname === '/Dashboard' ? theme.colors.primary : theme.colors.white
             }
           />
         </Col>
@@ -25,8 +25,8 @@ const Menu: React.FC = () => {
           <p
             style={
               router.pathname === '/Dashboard'
-                ? { color: theme.colors.blue }
-                : undefined
+                ? { color: theme.colors.primary }
+                : { color: theme.colors.white }
             }
           >
             Dashboard
@@ -37,7 +37,7 @@ const Menu: React.FC = () => {
         <Col lg="auto">
           <BookIcon
             color={
-              router.pathname === '/Bookmarked' ? theme.colors.blue : undefined
+              router.pathname === '/Bookmarked' ? theme.colors.primary : theme.colors.white
             }
           />
         </Col>
@@ -45,8 +45,8 @@ const Menu: React.FC = () => {
           <p
             style={
               router.pathname === '/Bookmarked'
-                ? { color: theme.colors.blue }
-                : undefined
+                ? { color: theme.colors.primary }
+                : { color: theme.colors.white }
             }
           >
             Bookmarked
@@ -56,15 +56,15 @@ const Menu: React.FC = () => {
       <Row>
         <Col lg="auto">
           <UserIcon
-            color={router.pathname === '/Users' ? theme.colors.blue : undefined}
+            color={router.pathname === '/Users' ? theme.colors.primary : theme.colors.white}
           />
         </Col>
         <Col>
           <p
             style={
               router.pathname === '/Users'
-                ? { color: theme.colors.blue }
-                : undefined
+                ? { color: theme.colors.primary }
+                : { color: theme.colors.white }
             }
           >
             Usuários
@@ -73,13 +73,13 @@ const Menu: React.FC = () => {
       </Row>
       <Row className="addicon">
         <AddIcon
-          color={router.pathname === '/Rooms' ? theme.colors.blue : undefined}
+          color={router.pathname === '/Rooms' ? theme.colors.primary : theme.colors.secondary}
         />
         <p
           style={
             router.pathname === '/Rooms'
-              ? { color: theme.colors.blue }
-              : undefined
+              ? { color: theme.colors.primary }
+              : { color: theme.colors.white }
           }
         >
           Cadastrar sala

@@ -2,22 +2,26 @@ import styled, { css } from 'styled-components'
 
 export const LogoContainer = styled.div`
   ${({ theme }) => css`
-    background: ${theme.colors.logoGray};
+    background: ${theme.colors.secondary};
     margin: 90px auto 54px auto;
     width: 418px;
-    height: 87px;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   `}
 `
 
 export const LogoText = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.white};
+    display: block;
     font-style: normal;
+    font-family: 'Inter';
     font-weight: 400;
     font-size: 35px;
     line-height: 42px;
-    position: absolute;
-    margin-top: 22px;
   `}
 `
 
