@@ -12,15 +12,14 @@ export const CardsContainerTag = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    ${CardContainer} {
-      transition: transform 0.5s;
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
 
-    @media (max-width: 576px) {
-      width: 96%;
+    @media (min-width: 577px) {
+      ${CardContainer} {
+        transition: transform 0.5s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
     }
   `}
 `

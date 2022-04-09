@@ -6,10 +6,9 @@ function Icon({ color }) {
       xmlns="http://www.w3.org/2000/svg"
       width="47"
       height="47"
-      fill="none"
       viewBox="0 0 47 47"
     >
-      <g style={color ? undefined : { mixBlendMode: "color-burn" }} opacity={ "1"}>
+      <g style={{ mixBlendMode: "color-burn" }} opacity={ "1"}>
         <g filter="url(#filter0_ddd_34_487)">
           <rect
             width="23"

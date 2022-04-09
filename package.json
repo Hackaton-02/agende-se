@@ -16,8 +16,10 @@
     "js-cookie": "^3.0.1",
     "next": "12.1.4",
     "next-pwa": "^5.4.6",
+    "polished": "^4.2.2",
     "react": "18.0.0",
     "react-bootstrap": "^2.2.2",
+    "react-datepicker": "^4.7.0",
     "react-dom": "18.0.0",
     "react-redux": "^7.2.8",
     "redux": "^4.1.2",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@types/node": "17.0.23",
     "@types/react": "17.0.43",
+    "@types/react-datepicker": "^4.3.4",
     "@types/react-dom": "17.0.14",
     "@types/styled-components": "^5.1.24",
     "@typescript-eslint/eslint-plugin": "^5.17.0",

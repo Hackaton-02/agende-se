@@ -1,10 +1,9 @@
-import { Field } from 'dtos/Fields'
 import { Dispatch, SetStateAction } from 'react'
-import { Col, Form, FormControl, FormLabel, InputGroup } from 'react-bootstrap'
+import { Col, Form } from 'react-bootstrap'
 
 type Fields = {
-  fields: Partial<Field>
-  values?: object
+  fields: any
+  values?: { [key: string]: string }
   setValues: Dispatch<
     SetStateAction<{
       name: string
@@ -23,10 +22,10 @@ export const Fields: any = ({
   disabled,
   handleSubmit
 }: Fields) => {
-  return Object.keys(fields).map((field: unknown, i) => {
+  return Object.keys(fields).map((field: any, i) => {
     return !fields[field].hidden ? (
       <Col key={fields[field].label}>
-        <Form.Group className="mx-auto" controlId={`validationCustom${i}`}>
+        <Form.Group className="mx-auto" controlId={i < 3 ? `validationCustom1` : `validationCustom2`}>
           <Form.Label as={Col} lg={12}>
             {fields[field].label}
           </Form.Label>
@@ -34,9 +33,8 @@ export const Fields: any = ({
             required={fields[field].required}
             value={values ? values[field] : undefined}
             disabled={disabled}
-            //  name={fields[field].name}
             onChange={e => {
-              setValues({ ...values, [field]: e.target.value })
+              setValues({ ...values, [field]: e.target.value } as any)
             }}
             type={fields[field].type}
             placeholder={fields[field].placeholder}

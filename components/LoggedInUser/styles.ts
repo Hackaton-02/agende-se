@@ -26,10 +26,16 @@ export const UserNameText = styled.p`
 
   .logout {
     font-weight: 600;
-    font-size: 25px;
+    //   font-size: 25px;
+    font-size: 20px;
     line-height: 29px;
-    color: #000000;
+    //    color: #000000;
+    color: white;
     margin-right: 50px;
+  }
+
+  .avatar {
+    color: white;
   }
   ${media.lessThan('medium')`
     margin-right: 15vw;

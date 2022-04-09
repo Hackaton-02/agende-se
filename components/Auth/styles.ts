@@ -1,23 +1,32 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 export const LogoContainer = styled.div`
   ${({ theme }) => css`
-    background: ${theme.colors.logoGray};
+    background: ${theme.colors.secondary};
     margin: 90px auto 54px auto;
     width: 418px;
-    height: 87px;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ${media.lessThan("medium")`
+    transform: translate(35%, 0px);
+    `}
   `}
 `
 
 export const LogoText = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.white};
+    display: block;
     font-style: normal;
     font-weight: 400;
+    font-family: 'Inter';
     font-size: 35px;
     line-height: 42px;
-    position: absolute;
-    margin-top: 22px;
   `}
 `
 
@@ -43,6 +52,7 @@ export const Wrapper = styled.div`
 
       &:invalid {
         animation: shake ease-out 0.3s;
+        border: 1px solid red;
       }
     }
 
@@ -88,6 +98,10 @@ export const TextContainer = styled.div`
     color: ${theme.colors.white};
     margin: 0px auto 7px auto;
 
+    p:nth-child(1) {
+      margin-bottom: 0 !important;
+    }
+
     p:nth-child(2) {
       font-family: 'Inter';
       font-style: normal;
@@ -117,7 +131,6 @@ export const FieldsContainer = styled.div`
       margin-top: 20px;
     }
     &.paragraph {
-
       & p {
         display: none;
       }
@@ -129,6 +142,5 @@ export const Logo = styled.img.attrs(() => ({
   alt: 'Logo'
 }))`
   width: 82px;
-  margin-left: 22px;
-  margin-right: 40px;
+  margin-right: 15px;
 `

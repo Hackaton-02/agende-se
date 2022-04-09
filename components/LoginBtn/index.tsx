@@ -4,19 +4,18 @@ import { Button } from 'react-bootstrap'
 import { FieldsContainer } from 'components/Auth/styles'
 
 type LoginBtnProps = {
-  isSignup: boolean
   isValid: boolean
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ isSignup, isValid }) => {
+const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
   const router = useRouter()
 
   return (
     <S.Wrapper
       className="container mx-auto"
       as={Button}
-      isSignup={isSignup}
       type="submit"
+      disabled={!isValid}
       onAnimationEnd={() => {
         const container = document.querySelector('.container')!
         const p = document.querySelector(`${FieldsContainer}`)
