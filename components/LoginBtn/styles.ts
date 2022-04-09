@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components'
 
-type BtnProps = {
-  isSignup: boolean
-}
-
-export const Wrapper = styled.div<BtnProps>`
-  ${({ theme, isSignup }) => css`
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
     align-items: center;
     background: ${theme.colors.primary};
     border-radius: 40px;
@@ -115,9 +111,7 @@ export const Wrapper = styled.div<BtnProps>`
       }
       6% {
         width: 80px;
-        /* position: absolute;
-        top: ${isSignup ? '168%' : '80%'};
-        left: 43.5%; */
+
       }
       71% {
         transform: scale(1);
@@ -131,9 +125,7 @@ export const Wrapper = styled.div<BtnProps>`
 
       94% {
         width: 80px;
-        /* position: absolute;
-        top: ${isSignup ? '168%' : '80%'};
-        left: 43.5%; */
+
       }
       100% {
         width: 482px;
