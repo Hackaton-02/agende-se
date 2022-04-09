@@ -30,8 +30,17 @@ export const UserNameText = styled.p`
     font-size: 20px;
     line-height: 29px;
     //    color: #000000;
+    font-size: 20px;
+    line-height: 29px;
     color: white;
     margin-right: 50px;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 5px 10px;
+  }
+
+  .avatarName {
+    color: white;
   }
 
   .avatar {

@@ -23,6 +23,7 @@ export const LogoText = styled.span`
     color: ${theme.colors.white};
     display: block;
     font-style: normal;
+    font-family: 'Inter';
     font-weight: 400;
     font-family: 'Inter';
     font-size: 35px;
