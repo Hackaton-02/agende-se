@@ -26,6 +26,10 @@ export const UserNameText = styled.p`
 
   .logout {
     font-weight: 600;
+    //   font-size: 25px;
+    font-size: 20px;
+    line-height: 29px;
+    //    color: #000000;
     font-size: 20px;
     line-height: 29px;
     color: white;
@@ -36,6 +40,10 @@ export const UserNameText = styled.p`
   }
 
   .avatarName {
+    color: white;
+  }
+
+  .avatar {
     color: white;
   }
   ${media.lessThan('medium')`

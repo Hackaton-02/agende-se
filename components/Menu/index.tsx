@@ -3,7 +3,6 @@ import * as S from './styles'
 import DashIcon from '../../public/Home'
 import BookIcon from '../../public/Bookmarked'
 import UserIcon from '../../public/User'
-import AddIcon from '../../public/Add'
 
 import { useRouter } from 'next/router'
 import { useTheme } from 'styled-components'
@@ -11,13 +10,16 @@ import { useTheme } from 'styled-components'
 const Menu: React.FC = () => {
   const router = useRouter()
   const theme = useTheme()
+
   return (
     <S.Wrapper>
-      <Row lg="auto">
-        <Col lg="auto">
+      <Row>
+        <Col>
           <DashIcon
             color={
-              router.pathname === '/Dashboard' ? theme.colors.primary : theme.colors.white
+              router.pathname === '/Dashboard'
+                ? theme.colors.primary
+                : theme.colors.white
             }
           />
         </Col>
@@ -33,11 +35,13 @@ const Menu: React.FC = () => {
           </p>
         </Col>
       </Row>
-      <Row lg="auto">
-        <Col lg="auto">
+      <Row>
+        <Col>
           <BookIcon
             color={
-              router.pathname === '/Bookmarked' ? theme.colors.primary : theme.colors.white
+              router.pathname === '/Bookmarked'
+                ? theme.colors.primary
+                : theme.colors.white
             }
           />
         </Col>
@@ -54,9 +58,13 @@ const Menu: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col lg="auto">
+        <Col>
           <UserIcon
-            color={router.pathname === '/Users' ? theme.colors.primary : theme.colors.white}
+            color={
+              router.pathname === '/Users'
+                ? theme.colors.primary
+                : theme.colors.white
+            }
           />
         </Col>
         <Col>
@@ -71,9 +79,14 @@ const Menu: React.FC = () => {
           </p>
         </Col>
       </Row>
-      <Row className="addicon">
-        <AddIcon
-          color={router.pathname === '/Rooms' ? theme.colors.primary : theme.colors.secondary}
+      <Row >
+        <i
+        className='fa fa-plus-circle'
+         style={router.pathname === '/Rooms'
+         ?
+          { color: theme.colors.primary }
+          : { color: theme.colors.white }
+        }
         />
         <p
           style={

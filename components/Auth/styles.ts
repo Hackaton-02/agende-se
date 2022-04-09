@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 export const LogoContainer = styled.div`
   ${({ theme }) => css`
@@ -9,7 +10,11 @@ export const LogoContainer = styled.div`
     border-radius: 8px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+
+    ${media.lessThan("medium")`
+    transform: translate(35%, 0px);
+    `}
   `}
 `
 
@@ -20,6 +25,7 @@ export const LogoText = styled.span`
     font-style: normal;
     font-family: 'Inter';
     font-weight: 400;
+    font-family: 'Inter';
     font-size: 35px;
     line-height: 42px;
   `}
@@ -47,6 +53,7 @@ export const Wrapper = styled.div`
 
       &:invalid {
         animation: shake ease-out 0.3s;
+        border: 1px solid red;
       }
     }
 
@@ -92,6 +99,10 @@ export const TextContainer = styled.div`
     color: ${theme.colors.white};
     margin: 0px auto 7px auto;
 
+    p:nth-child(1) {
+      margin-bottom: 0 !important;
+    }
+
     p:nth-child(2) {
       font-family: 'Inter';
       font-style: normal;
@@ -121,7 +132,6 @@ export const FieldsContainer = styled.div`
       margin-top: 20px;
     }
     &.paragraph {
-
       & p {
         display: none;
       }
@@ -133,6 +143,5 @@ export const Logo = styled.img.attrs(() => ({
   alt: 'Logo'
 }))`
   width: 82px;
-  margin-left: 22px;
-  margin-right: 40px;
+  margin-right: 15px;
 `
