@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import {
   CardContainer,
   Title,
@@ -12,6 +13,7 @@ export type CardProps = {
 }
 
 const Card: React.FC<CardProps> = () => {
+  const router = useRouter()
   return (
     <>
       <CardContainer>
@@ -21,7 +23,7 @@ const Card: React.FC<CardProps> = () => {
           The following elements are commonly found among that variety.
         </Paragraph>
         <ButtonsContainer>
-          <DetailsBtn>Ver detalhes</DetailsBtn>
+          <DetailsBtn onClick={() => router.push("/Room")}>Ver detalhes</DetailsBtn>
           <Price>
             <img src="price-tag.svg" />
             R$ 20,00/dia
