@@ -1,10 +1,16 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript
+} from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en-US">
+      <Html lang="pt-BR">
         <Head>
           <link
             rel="stylesheet"
@@ -19,7 +25,7 @@ export default class MyDocument extends Document {
       </Html>
     )
   }
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
 

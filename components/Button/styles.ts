@@ -5,7 +5,7 @@ import { ButtonProps } from '.'
 
 export type WrapperProps = { hasIcon: boolean } & Pick<
   ButtonProps,
-  'size' | 'fullWidth' | 'minimal'
+  'size' | 'fullWidth' | 'minimal' | 'avaliable'
 >
 
 const wrapperModifiers = {
@@ -32,13 +32,14 @@ const wrapperModifiers = {
     svg {
       width: 1.5rem;
       margin-left: ${theme.spacings.xxsmall};
+      margin-right: calc(${theme.spacings.xxsmall} / 4);
     }
   `,
-  minimal: (theme: DefaultTheme) => css`
+  minimal: (theme: DefaultTheme, avaliable: boolean) => css`
     background: none;
-    color: ${theme.colors.green};
+    color: ${avaliable ? theme.colors.green: "red"};
     &:hover {
-      color: ${darken(0.1, theme.colors.green)};
+      color: ${darken(0.2, avaliable ? theme.colors.green: "red")};
     }
   `,
   disabled: () => css`
@@ -50,7 +51,7 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal, disabled, avaliable }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +73,7 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth};
     ${!!hasIcon && wrapperModifiers.withIcon(theme)};
-    ${!!minimal && wrapperModifiers.minimal(theme)};
+    ${!!minimal && wrapperModifiers.minimal(theme, avaliable!)};
     ${disabled && wrapperModifiers.disabled()};
   `}
 `

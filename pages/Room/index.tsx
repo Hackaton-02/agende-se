@@ -11,6 +11,13 @@ import { Row } from 'react-bootstrap'
 import Link from 'next/link'
 
 const Room: React.FC = () => {
+  const info = {
+    title: 'Nome da sala',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam turpis magna velit in massa. Ornare aliquet feugiat diam quis urna, nibh. Ac pellentesque proin viverra velit venenatis enim aliquam. Risus hac iaculis odio scelerisque turpis.',
+    price: 20,
+    id: '1'
+  }
   const room = {
     bathroom: false,
     airConditioned: true,
@@ -18,6 +25,7 @@ const Room: React.FC = () => {
     internet: true,
     roomCleaning: true
   }
+
   return (
     <S.Wrapper>
       <Header>
@@ -36,7 +44,7 @@ const Room: React.FC = () => {
       <S.Cover />
       <S.Main>
         <S.SectionRoomInfo>
-          <RoomInfo />
+          <RoomInfo info={info} />
         </S.SectionRoomInfo>
         <hr />
         <Row>
