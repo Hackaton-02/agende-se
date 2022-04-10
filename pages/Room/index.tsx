@@ -9,14 +9,16 @@ import 'react-datepicker/dist/react-datepicker.css'
 import * as S from './styles'
 import { Row } from 'react-bootstrap'
 import Link from 'next/link'
+import { NextPage } from 'next'
 
-const Room: React.FC = () => {
+const Room: NextPage = () => {
   const info = {
     title: 'Nome da sala',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam turpis magna velit in massa. Ornare aliquet feugiat diam quis urna, nibh. Ac pellentesque proin viverra velit venenatis enim aliquam. Risus hac iaculis odio scelerisque turpis.',
     price: 20,
-    id: '1'
+    id: '1',
+    avaliable: true
   }
   const room = {
     bathroom: false,
@@ -37,7 +39,7 @@ const Room: React.FC = () => {
         <div className="text-logo">Agende-se</div>
         <LoggedInUser>
           <span className="logout">Logout</span>
-          <img src="avatar.svg" />{' '}
+          <img src="avatar.svg" />
           <span className="avatar">{'John Smith'}</span>
         </LoggedInUser>
       </Header>

@@ -6,8 +6,9 @@ import AuthState from 'dtos/AuthState'
 import { useSelector } from 'react-redux'
 import * as S from './styles'
 import CardContainer from 'components/CardsContainer'
+import { NextPage } from 'next'
 
-const Dashboard: React.FC = () => {
+const Dashboard: NextPage = () => {
   const user = useSelector((state: AuthState) => state.auth.loggedUser)
 
   return (

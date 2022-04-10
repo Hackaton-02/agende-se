@@ -4,6 +4,11 @@ import media from 'styled-media-query'
 import { Container } from '../../components/Container'
 
 export const Main = styled.main`
+    margin-top: 23rem;
+
+  ${media.lessThan('medium')`
+    margin-top: 15rem;
+`}
   .react-datepicker {
     box-shadow: 19.373px 19.373px 15.4984px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -24,6 +29,7 @@ export const Main = styled.main`
     text-align: center;
 
     color: #000000;
+
     &:first-child {
       margin-left: 5rem;
     }
@@ -43,11 +49,6 @@ export const Main = styled.main`
       border-radius: 50%;
     }
   }
-
-  margin-top: 25rem;
-  ${media.greaterThan('medium')`
-    margin-top: 23rem;
-`}
 `
 
 export const Cover = styled.div`
@@ -87,7 +88,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    ${media.lessThan("medium")`
+    ${media.lessThan('medium')`
     align-items: center;
 
     `}

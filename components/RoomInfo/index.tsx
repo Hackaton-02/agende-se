@@ -16,7 +16,7 @@ export type RoomInfoProps = {
 }
 
 const RoomInfo = ({
-  info: { title, price, description, id, avaliable = true }
+  info: { title, price, description, id, avaliable }
 }: RoomInfoProps) => (
   <S.Wrapper>
     <Heading color="black" lineBottom>
