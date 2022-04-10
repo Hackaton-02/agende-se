@@ -36,7 +36,7 @@ const Menu: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col  onClick={() => router.push('/Bookmarked')}>
           <BookIcon
             color={
               router.pathname === '/Bookmarked'

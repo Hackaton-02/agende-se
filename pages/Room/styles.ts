@@ -17,6 +17,10 @@ export const Main = styled.main`
     margin-bottom: 35px;
   }
 
+ & .user-info .row {
+    margin-bottom: 20px;
+  }
+
   h1 {
     font-style: normal;
     font-weight: 700;

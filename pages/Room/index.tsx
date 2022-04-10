@@ -10,8 +10,16 @@ import * as S from './styles'
 import { Row } from 'react-bootstrap'
 import Link from 'next/link'
 import { NextPage } from 'next'
+import ModalRent from 'components/Modal'
+import { useState } from 'react'
 
 const Room: NextPage = () => {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const handleModal = () => {
+    setIsVisible(prevState => !prevState)
+  }
+
   const info = {
     title: 'Nome da sala',
     description:
@@ -46,7 +54,7 @@ const Room: NextPage = () => {
       <S.Cover />
       <S.Main>
         <S.SectionRoomInfo>
-          <RoomInfo info={info} />
+          <RoomInfo info={info} onClick={handleModal} />
         </S.SectionRoomInfo>
         <hr />
         <Row>
@@ -69,6 +77,7 @@ const Room: NextPage = () => {
           </div>
         </Row>
       </S.Main>
+      <ModalRent isVisible={isVisible} onClose={handleModal} />
     </S.Wrapper>
   )
 }

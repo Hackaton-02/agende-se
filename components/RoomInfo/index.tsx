@@ -6,6 +6,7 @@ import Button from 'components/Button'
 import Avaliable from '../../public/Avaliable'
 
 export type RoomInfoProps = {
+  onClick: () => void
   info: {
     id?: string
     title?: string
@@ -16,7 +17,7 @@ export type RoomInfoProps = {
 }
 
 const RoomInfo = ({
-  info: { title, price, description, id, avaliable }
+  info: { title, price, description, id, avaliable }, onClick
 }: RoomInfoProps) => (
   <S.Wrapper>
     <Heading color="black" lineBottom>
@@ -42,7 +43,7 @@ const RoomInfo = ({
       >
         {avaliable ? 'Disponível' : 'Indisponível'}
       </Button>
-      <Button disabled={!avaliable} size="small">
+      <Button disabled={!avaliable} size="small" onClick={onClick}>
         Reservar
       </Button>
     </S.ButtonsWrapper>
