@@ -42,7 +42,9 @@ const RoomInfo = ({
       >
         {avaliable ? 'Disponível' : 'Indisponível'}
       </Button>
-      <Button disabled={!avaliable} size="small">Reservar</Button>
+      <Button disabled={!avaliable} size="small">
+        Reservar
+      </Button>
     </S.ButtonsWrapper>
   </S.Wrapper>
 )
