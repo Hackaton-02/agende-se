@@ -25,13 +25,13 @@ export const Fields: any = ({
   return Object.keys(fields).map((field: any, i) => {
     return !fields[field].hidden ? (
       <Col key={fields[field].label}>
-        <Form.Group className="mx-auto" controlId={i < 3 ? `validationCustom1` : `validationCustom2`}>
+        <Form.Group className="mx-auto" controlId={`validationCustom${i}`}>
           <Form.Label as={Col} lg={12}>
             {fields[field].label}
           </Form.Label>
           <Form.Control
             required={fields[field].required}
-            value={values ? values[field] : undefined}
+            value={values![field]}
             disabled={disabled}
             onChange={e => {
               setValues({ ...values, [field]: e.target.value } as any)

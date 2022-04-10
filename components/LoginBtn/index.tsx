@@ -15,7 +15,6 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
       className="container mx-auto"
       as={Button}
       type="submit"
-      disabled={!isValid}
       onAnimationEnd={() => {
         const container = document.querySelector('.container')!
         const p = document.querySelector(`${FieldsContainer}`)
