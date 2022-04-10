@@ -14,7 +14,7 @@ const Menu: React.FC = () => {
   return (
     <S.Wrapper>
       <Row>
-        <Col>
+        <Col onClick={() => router.push('/Dashboard')}>
           <DashIcon
             color={
               router.pathname === '/Dashboard'
@@ -58,7 +58,7 @@ const Menu: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col onClick={() => router.push('/Users')}>
           <UserIcon
             color={
               router.pathname === '/Users'
@@ -81,16 +81,17 @@ const Menu: React.FC = () => {
       </Row>
       <Row >
         <i
-        className='fa fa-plus-circle'
-         style={router.pathname === '/Rooms'
-         ?
-          { color: theme.colors.primary }
-          : { color: theme.colors.white }
-        }
+          className="fa fa-plus-circle"
+          onClick={() => router.push('/New')}
+          style={
+            router.pathname === '/New'
+              ? { color: theme.colors.primary }
+              : { color: theme.colors.white }
+          }
         />
         <p
           style={
-            router.pathname === '/Rooms'
+            router.pathname === '/New'
               ? { color: theme.colors.primary }
               : { color: theme.colors.white }
           }
