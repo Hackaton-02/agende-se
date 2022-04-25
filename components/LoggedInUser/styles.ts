@@ -32,14 +32,20 @@ export const UserNameText = styled.p`
     font-size: 20px;
     line-height: 29px;
     //    color: #000000;
+    font-size: 20px;
+    line-height: 29px;
     color: white;
     margin-right: 50px;
     animation: opacity 1s linear forwards;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 5px 10px;
   }
 
   .avatar {
     color: white;
   }
+  
   ${media.lessThan('medium')`
     margin-right: 15vw;
   `}

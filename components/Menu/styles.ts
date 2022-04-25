@@ -5,8 +5,7 @@ export const Wrapper = styled.div`
     width: 473px;
  //   height: 56px;
   //  background: ${theme.colors.menu};
-  background: #E3B2FF;
-
+    background: #E3B2FF;
     border-radius: 8px 8px 0px 0px;
     margin: 100px auto 0 auto;
     display: flex;
