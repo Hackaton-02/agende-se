@@ -6,16 +6,16 @@ import 'react-datepicker/dist/react-datepicker.css'
 import ReactDOM from 'react-dom'
 
 type Props = {
-  isVisible: boolean;
-  onClose: () => void;
+  isVisible: boolean
+  onClose: () => void
 }
-const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
 
+const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
   const portal = document.getElementById('modal-portal')
 
   if (isVisible) {
     return (
-      <S.ModalWrapper >
+      <S.ModalWrapper>
         {ReactDOM.createPortal(
           <S.BackDrop>
             <Modal.Dialog>
@@ -25,14 +25,14 @@ const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
               <Modal.Body>
                 <Row lg={12}>
                   <Col lg={6} className="user-info">
-                    <Form.Select>
+                    <Form.Select className="mb-3">
                       <option>Selecione um usuário</option>
                     </Form.Select>
                     <Row lg={12}>
-                      <Col lg={6} className="mb-3 mt-3">
+                      <Col lg={9} className="mb-3 mt-3">
                         <Form.Control type="text" placeholder="Rua/Avenida" />
                       </Col>
-                      <Col lg={6} className="mb-3 mt-3">
+                      <Col lg={3} className="mb-3 mt-3">
                         <Form.Control type="text" placeholder="Número" />
                       </Col>
                     </Row>
@@ -77,7 +77,6 @@ const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
                   </Col>
                 </Row>
               </Modal.Body>
-
               <Modal.Footer>
                 <Button color="primary" minimal onClick={onClose}>
                   Fechar
@@ -91,6 +90,7 @@ const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
       </S.ModalWrapper>
     )
   }
+  return <></>
 }
 
 export default ModalRent

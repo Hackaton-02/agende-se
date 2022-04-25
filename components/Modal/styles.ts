@@ -15,15 +15,17 @@ export const BackDrop = styled.div`
 
     .modal-dialog {
       ${media.greaterThan('medium')`
-    max-width: 1000px;
-    height: 800px;
+        max-width: 1000px;
+        height: 800px;
     `}
     }
 
     .user-info {
       border: 2px solid ${theme.colors.gray};
-      border-radius: 15px;
-      padding-top: 70px;
+      border-radius: ${theme.border.radius};
+      margin-left: ${theme.spacings.xsmall};
+      padding-top: calc(${theme.spacings.large} * 1.25);
+      max-width: calc(${theme.grid.container} / 4.5);
     }
 
     .react-datepicker {
@@ -39,17 +41,19 @@ export const BackDrop = styled.div`
     h5 {
       display: flex;
       justify-content: center;
+      font-weight: ${theme.font.bold};
     }
+
     & span.total {
       color: ${theme.colors.primary};
       margin-right: 8px;
+      font-weight: ${theme.font.bold};
     }
 
     .modal-bg {
       background-color: ${theme.colors.modalLeftBg};
       padding-left: ${theme.spacings.small};
       padding-right: ${theme.spacings.small};
-      padding-bottom: ${theme.spacings.small};
       margin-left: ${theme.spacings.small};
       margin-right: ${theme.spacings.small};
     }
