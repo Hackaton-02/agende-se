@@ -1,15 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
-const wrapperModifiers = {
-  between: () => css`
-    justify-content: space-between;
-  `,
-
-  around: () => css`
-    justify-content: space-around;
-  `
-}
 
 export const CardContainer = styled.div`
   ${({ theme }) => css`
