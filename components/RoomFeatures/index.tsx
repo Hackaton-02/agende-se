@@ -1,24 +1,13 @@
+import Room from "dtos/Room";
 import * as S from "./styles"
 
-type Room = {
-  room: {
-    bathroom?: boolean
-    airConditioned?: boolean
-    petsAllowed?: boolean
-    internet?: boolean
-    roomCleaning?: boolean
-  }
+type Props = {
+  room: Room
 }
 
-const RoomFeatures = ({
-  room: {
-    bathroom = false,
-    airConditioned = true,
-    petsAllowed = false,
-    internet = true,
-    roomCleaning = true
-  }
-}: Room) => {
+const RoomFeatures = ({ room: { features: { internet, airConditioned, roomCleaning, bathroom, furnished }} }: Props) => {
+
+
   return (
     <S.Wrapper>
       <div className="features mt-5">
@@ -54,13 +43,13 @@ const RoomFeatures = ({
         <div className="room-feature">
           <i
             className={
-              petsAllowed
+              furnished
                 ? 'fa fa-check text-success'
                 : 'fa fa-times text-danger'
             }
             aria-hidden={true}
           ></i>
-          <p>Pets</p>
+          <p>Mobiliada</p>
         </div>
         <div className="room-feature">
           <i
