@@ -1,4 +1,7 @@
+import RoomRent from 'dtos/RoomRent'
 import { useRouter } from 'next/router'
+import { priceFormat } from 'utils/format-price'
+import shorten from 'utils/shorten-text'
 import {
   CardContainer,
   Title,
@@ -10,23 +13,30 @@ import {
 
 export type CardProps = {
   isSpaced?: boolean
+  rent: RoomRent
 }
 
-const Card: React.FC<CardProps> = () => {
+const CardRent: React.FC<CardProps> = ({ rent }) => {
   const router = useRouter()
   return (
     <>
       <CardContainer>
-        <Title>Nome da sala</Title>
-        <Paragraph>
-          Card layouts can vary to support the types of content they contain.
-          The following elements are commonly found among that variety.
-        </Paragraph>
+        <Title>{shorten(rent.title, 10)}</Title>
+        <Paragraph>{shorten(rent.description, 120)}</Paragraph>
         <ButtonsContainer>
-          <DetailsBtn onClick={() => router.push("/Room")}>Ver detalhes</DetailsBtn>
+          <DetailsBtn
+            onClick={() =>
+              router.push({
+                pathname: `/Room/[id]`,
+                query: { id: `${rent.id}`, rent: true }
+              })
+            }
+          >
+            Ver detalhes
+          </DetailsBtn>
           <Price>
             <img src="price-tag.svg" />
-            R$ 20,00/dia
+            {priceFormat(rent.price)}/dia
           </Price>
         </ButtonsContainer>
       </CardContainer>
@@ -34,4 +44,4 @@ const Card: React.FC<CardProps> = () => {
   )
 }
 
-export default Card
+export default CardRent

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
-
 export const CardContainer = styled.div`
   ${({ theme }) => css`
  //   background-color: ${theme.colors.lightPrimary};
@@ -45,7 +44,8 @@ export const Paragraph = styled.p`
     margin-top: 8px;
     text-overflow: ellipsis;
     overflow: hidden;
-  `}
+
+    `}
 `
 
 export const ButtonsContainer = styled.div`

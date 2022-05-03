@@ -9,6 +9,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '../store'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>

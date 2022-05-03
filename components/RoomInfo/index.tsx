@@ -9,7 +9,7 @@ export type RoomInfoProps = {
   onClick: () => void
   info: {
     id?: string
-    title?: string
+    name?: string
     description?: string
     price?: number
     avaliable?: boolean
@@ -17,11 +17,12 @@ export type RoomInfoProps = {
 }
 
 const RoomInfo = ({
-  info: { title, price, description, id, avaliable }, onClick
+  info: { name, price, description, id, avaliable },
+  onClick
 }: RoomInfoProps) => (
   <S.Wrapper>
     <Heading color="black" lineBottom>
-      {title}
+      {name}
     </Heading>
     <Ribbon>{priceFormat(price!)}/dia</Ribbon>
     <S.Description>{description}</S.Description>

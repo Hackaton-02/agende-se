@@ -4,14 +4,40 @@ import * as S from './styles'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import ReactDOM from 'react-dom'
+import { useState } from 'react'
+import { priceFormat } from 'utils/format-price'
 
 type Props = {
   isVisible: boolean
   onClose: () => void
+  excludeDates: [Date] | []
+  price: number
 }
 
-const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
+const ModalRent: React.FC<Props> = ({ isVisible, onClose, excludeDates, price }) => {
   const portal = document.getElementById('modal-portal')
+
+  const [checkInDate, setCheckInDate] = useState()
+  const [checkOutDate, setCheckOutDate] = useState()
+  const [daysOfStay, setDaysOfStay] = useState()
+
+  const onChange = (dates: any) => {
+    const [checkInDate, checkOutDate] = dates;
+
+    setCheckInDate(checkInDate)
+    setCheckOutDate(checkOutDate)
+
+    if (checkInDate && checkOutDate) {
+
+        // Calclate days of stay
+
+        const days = Math.floor((((new Date(checkOutDate) as any) - (new Date(checkInDate) as any)) / 86400000) + 1)
+
+        setDaysOfStay(days as any)
+
+    }
+
+}
 
   if (isVisible) {
     return (
@@ -61,17 +87,17 @@ const ModalRent: React.FC<Props> = ({ isVisible, onClose }) => {
                       <h5 className="mb-3">Selecione os dias</h5>
                       <DatePicker
                         className="w-100"
-                        //  selected={checkInDate}
-                        onChange={() => {}}
-                        //  startDate={checkInDate}
-                        // endDate={checkOutDate}
+                        selected={checkInDate}
+                        onChange={onChange}
+                        startDate={checkInDate}
+                        endDate={checkOutDate}
                         minDate={new Date()}
                         selectsRange
                         inline
-                        //  excludeDates={excludedDates}
+                        excludeDates={excludeDates}
                       />
                       <h5 className="mt-3">
-                        <span className="total"> Total: </span>R$ 420,00
+                        <span className="total"> Total: </span>{priceFormat(daysOfStay! * (price) || 0)}
                       </h5>
                     </Row>
                   </Col>

@@ -6,10 +6,15 @@ import UserIcon from '../../public/User'
 
 import { useRouter } from 'next/router'
 import { useTheme } from 'styled-components'
+import { useSelector } from 'react-redux'
+import AuthState from 'dtos/AuthState'
 
 const Menu: React.FC = () => {
+  const { profile } = useSelector((state: AuthState) => state.auth.loggedUser)
+
   const router = useRouter()
   const theme = useTheme()
+  const isAdmin = profile === 'admin'
 
   return (
     <S.Wrapper>
@@ -36,7 +41,7 @@ const Menu: React.FC = () => {
         </Col>
       </Row>
       <Row>
-        <Col  onClick={() => router.push('/Bookmarked')}>
+        <Col onClick={() => router.push('/Bookmarked')}>
           <BookIcon
             color={
               router.pathname === '/Bookmarked'
@@ -57,48 +62,53 @@ const Menu: React.FC = () => {
           </p>
         </Col>
       </Row>
-      <Row>
-        <Col onClick={() => router.push('/Users')}>
-          <UserIcon
-            color={
-              router.pathname === '/Users'
-                ? theme.colors.primary
-                : theme.colors.white
-            }
-          />
-        </Col>
-        <Col>
-          <p
-            style={
-              router.pathname === '/Users'
-                ? { color: theme.colors.primary }
-                : { color: theme.colors.white }
-            }
-          >
-            Usuários
-          </p>
-        </Col>
-      </Row>
-      <Row >
-        <i
-          className="fa fa-plus-circle"
-          onClick={() => router.push('/New')}
-          style={
-            router.pathname === '/New'
-              ? { color: theme.colors.primary }
-              : { color: theme.colors.white }
-          }
-        />
-        <p
-          style={
-            router.pathname === '/New'
-              ? { color: theme.colors.primary }
-              : { color: theme.colors.white }
-          }
-        >
-          Cadastrar sala
-        </p>
-      </Row>
+      {isAdmin && (
+        <>
+        <Row>
+          <Col onClick={() => router.push('/Users')}>
+            <UserIcon
+              color={
+                router.pathname === '/Users'
+                  ? theme.colors.primary
+                  : theme.colors.white
+              }
+            />
+          </Col>
+          <Col>
+            <p
+              style={
+                router.pathname === '/Users'
+                  ? { color: theme.colors.primary }
+                  : { color: theme.colors.white }
+              }
+            >
+              Usuários
+            </p>
+          </Col>
+        </Row>
+           <Row>
+           <i
+             className="fa fa-plus-circle"
+             onClick={() => router.push('/New')}
+             style={
+               router.pathname === '/New'
+                 ? { color: theme.colors.primary }
+                 : { color: theme.colors.white }
+             }
+           />
+           <p
+             style={
+               router.pathname === '/New'
+                 ? { color: theme.colors.primary }
+                 : { color: theme.colors.white }
+             }
+           >
+             Cadastrar sala
+           </p>
+         </Row>
+         </>
+      )}
+
     </S.Wrapper>
   )
 }

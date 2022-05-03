@@ -2,6 +2,8 @@ import Button from 'components/Button'
 import { TableWrapper } from 'components/TableUsers/styles'
 import { useState } from 'react'
 import { Col, Form, InputGroup, Row } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import RoomsService from 'services/rooms'
 
 const RoomContainer: React.FC = () => {
   const [newRoom, setNewRoom] = useState({
@@ -12,8 +14,19 @@ const RoomContainer: React.FC = () => {
     bathroom: false,
     avaliable: true,
     airConditioned: false,
-    furnished: false
+    furnished: false,
+    roomCleaning: false
   })
+
+  const handleCreateRoom = () => {
+    try {
+      RoomsService.create({ ...newRoom, price: Number(newRoom.price) })
+      toast.success('A sala foi criada com sucesso')
+    } catch (err) {
+      toast.error('Error ao criar sala ' + err)
+      console.error(err)
+    }
+  }
   return (
     <TableWrapper isSpaced>
       <Row>
@@ -125,8 +138,21 @@ const RoomContainer: React.FC = () => {
           Mobiliada
         </InputGroup>
       </Row>
+      <Row className="mt-2">
+        <InputGroup>
+          <Form.Switch
+            checked={newRoom.roomCleaning}
+            onChange={() =>
+              setNewRoom({ ...newRoom, furnished: !newRoom.roomCleaning })
+            }
+          />
+          Serviços de limpeza
+        </InputGroup>
+      </Row>
       <Col className="mt-5">
-        <Button fullWidth>Cadastrar sala</Button>
+        <Button fullWidth onClick={handleCreateRoom}>
+          Cadastrar sala
+        </Button>
       </Col>
     </TableWrapper>
   )

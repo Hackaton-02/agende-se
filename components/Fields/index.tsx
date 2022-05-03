@@ -13,14 +13,12 @@ type Fields = {
     }>
   >
   disabled: boolean
-  handleSubmit?: any
 }
 export const Fields: any = ({
   fields,
   values,
   setValues,
-  disabled,
-  handleSubmit
+  disabled
 }: Fields) => {
   return Object.keys(fields).map((field: any, i) => {
     return !fields[field].hidden ? (
