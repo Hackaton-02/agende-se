@@ -25,7 +25,6 @@ export const HeaderContainer = styled.div<HeaderProps>`
    //   color: ${theme.colors.primary};
       color: ${theme.colors.white};
       position: absolute;
-      padding:
     }
 
     display: flex;
