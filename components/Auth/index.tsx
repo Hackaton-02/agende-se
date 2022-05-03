@@ -2,12 +2,15 @@ import { Fields } from 'components/Fields'
 import LoginBtn from 'components/LoginBtn'
 import { useState } from 'react'
 import { Form, Row } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import UsersService from 'services/users'
+import { setLoggedUser } from 'store/modules/auth/reducer'
 import * as S from './styles'
 
 export const EmailPassword = (
   hideEmail: boolean = false,
-  hidePassword: boolean = false,
-  passwordLength: number
+  hidePassword: boolean = false
 ) => ({
   email: {
     helperText: 'email inválido ou obrigatório',
@@ -29,6 +32,8 @@ export const EmailPassword = (
 
 const Auth = () => {
   const [validated, setValidated] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const dispatch = useDispatch()
 
   const [values, setValues] = useState({
     name: '',
@@ -37,13 +42,9 @@ const Auth = () => {
     confirmation: ''
   })
   const [isSignup, setIsSignup] = useState(false)
-  const commom = EmailPassword(false, false, values.password.length)
+  const commom = EmailPassword(false, false)
 
-  const { password, email } = EmailPassword(
-    false,
-    false,
-    values.password.length
-  )
+  const { password, email } = EmailPassword(false, false)
 
   const newFields = {
     name: {
@@ -65,18 +66,45 @@ const Auth = () => {
 
   const fields = isSignup ? newFields : commom
 
-  const handleSubmit = (event: {
-    currentTarget: any
-    preventDefault: () => void
-    stopPropagation: () => void
-  }) => {
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
+    // const form: any = event?.currentTarget
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault()
+    //   event.stopPropagation()
+    // }
 
     setValidated(true)
+    const { email, password } = values
+
+    try {
+      const response = await UsersService.signIn({ email, password })
+
+      const {
+        id,
+        email: userEmail,
+        name,
+        profile,
+        ...rest
+      } = response.data.data
+
+      const user = {
+        id,
+        name,
+        email: userEmail,
+        profile: profile,
+        phone: rest.phone,
+        whatsapp_avaliable: rest.whatsapp_avaliable
+      }
+
+      if (isError) {
+        setIsError(false)
+      }
+
+      dispatch(setLoggedUser(user as any))
+    } catch (err) {
+      toast.error('E-mail ou senha inválidos!')
+      setIsError(true)
+    }
   }
 
   const form = document.querySelector('form')
@@ -93,7 +121,11 @@ const Auth = () => {
           <p>Faça login para continuar no Agende-se</p>
         </S.TextContainer>
         <S.FieldsContainer>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form
+            noValidate
+            validated={validated}
+            onSubmit={e => handleSubmit(e)}
+          >
             <Row>
               <Fields
                 values={values}
@@ -102,7 +134,11 @@ const Auth = () => {
                 fields={fields}
               />
             </Row>
-            <LoginBtn isValid={isValid!} />
+            <LoginBtn
+              error={isError}
+              onLogin={handleSubmit as any}
+              isValid={isValid!}
+            />
             <p
               className="link-text"
               onClick={() => {

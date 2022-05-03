@@ -5,9 +5,11 @@ import { FieldsContainer } from 'components/Auth/styles'
 
 type LoginBtnProps = {
   isValid: boolean
+  onLogin: () => void
+  error: boolean
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
+const LoginBtn: React.FC<LoginBtnProps> = ({ isValid, onLogin, error }) => {
   const router = useRouter()
 
   return (
@@ -20,7 +22,14 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
         const p = document.querySelector(`${FieldsContainer}`)
         container.classList.remove('activebtn')
         p?.classList.remove('paragraph')
-        //router.push('/Dashboard')
+
+        if (router.query.callback) {
+          router.push(decodeURIComponent(router.query.callback.toString()))
+        } else if (error) {
+          return
+        } else {
+          router.push('/Dashboard')
+        }
       }}
       onClick={(e: { preventDefault: () => void }) => {
         if (!isValid) return
@@ -29,6 +38,7 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
         const p = document.querySelector(`${FieldsContainer}`)
         p?.classList.toggle('paragraph')
         container.classList.toggle('activebtn')
+        onLogin()
       }}
     >
       <span className="text">Entrar </span>
@@ -206,20 +216,37 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid }) => {
           />
         </g>
       </svg>
-      <svg
-        className="ok"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100"
-        height="100"
-        viewBox="0 0 100 100"
-      >
-        <path
-          d="M34.912 50.75l10.89 10.125L67 36.75"
+      {error ? (
+        <svg
+          width="22"
+          height="22"
+          className="ok"
+          viewBox="0 0 22 22"
           fill="none"
-          stroke="#fff"
-          strokeWidth="6"
-        />
-      </svg>
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15.17 11L21.4244 4.74562C22.1919 3.97812 22.1919 2.73375 21.4244 1.96562L20.0344 0.575625C19.2669 -0.191875 18.0225 -0.191875 17.2544 0.575625L11 6.83L4.74563 0.575625C3.97813 -0.191875 2.73375 -0.191875 1.96563 0.575625L0.575625 1.96562C-0.191875 2.73312 -0.191875 3.9775 0.575625 4.74562L6.83 11L0.575625 17.2544C-0.191875 18.0219 -0.191875 19.2662 0.575625 20.0344L1.96563 21.4244C2.73313 22.1919 3.97813 22.1919 4.74563 21.4244L11 15.17L17.2544 21.4244C18.0219 22.1919 19.2669 22.1919 20.0344 21.4244L21.4244 20.0344C22.1919 19.2669 22.1919 18.0225 21.4244 17.2544L15.17 11Z"
+            fill="white"
+          />
+        </svg>
+      ) : (
+        <svg
+          className="ok"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
+          viewBox="0 0 100 100"
+        >
+          <path
+            d="M34.912 50.75l10.89 10.125L67 36.75"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="6"
+          />
+          )
+        </svg>
+      )}
     </S.Wrapper>
   )
 }
