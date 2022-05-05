@@ -1,26 +1,33 @@
-import Header from 'components/Header'
-import LoggedInUser from 'components/LoggedInUser'
-import Logo from 'components/Logo'
+import BookedContainer from 'components/BookedContainer'
+import Loader from 'components/Loader'
 import Menu from 'components/Menu'
+import MainComponent from 'components/shared/MainComponent'
+import NoData from 'components/shared/NoData'
 import { NextPage } from 'next'
-import * as S from './styles'
-
+import { toast } from 'react-toastify'
+import BookedService from 'services/booked'
+import useSWR from 'swr'
 
 const Bookmarked: NextPage = () => {
+  const { data, error } = useSWR(`/storefront/v1/booked`, BookedService.index)
 
+  if (error) {
+    toast.error('Erro ao obter dados dos consultórios!')
+    console.log(error)
+  }
+  console.log(data)
 
   return (
-    <S.Wrapper>
-      <Header>
-        <Logo size="small" /> <div className="text-logo">Agende-se</div>
-        <LoggedInUser>
-          <span className="logout">Logout</span>
-          <img src="avatar.svg" />
-          <span className="avatar">{'John Smith'}</span>
-        </LoggedInUser>
-      </Header>
+    <MainComponent>
       <Menu />
-    </S.Wrapper>
+      {!data ? (
+        <Loader />
+      ) : data.consultsBooked.length < 1 ? (
+        <NoData message="não há consultas cadastradas" />
+      ) : (
+        <BookedContainer books={data.consultsBooked} />
+      )}
+    </MainComponent>
   )
 }
 
