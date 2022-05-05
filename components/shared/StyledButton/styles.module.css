@@ -1,0 +1,18 @@
+.red_button {
+    background: #9701F0;
+    border: 2px solid rgb(200,10,10);
+}
+
+.red_button:hover {
+    background: none;
+}
+
+.blue_button {
+    background: teal;
+    border: 2px solid rgb(10,10,200);
+}
+
+.blue_button:hover {
+    background: rgb(31, 95, 95);
+    border: 2px solid rgb(224, 224, 224);
+}
