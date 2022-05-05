@@ -26,7 +26,7 @@ const AdminConfirmation: React.FC<AdminDeleteModalProps> = ({
     >
       <S.ModalBodyWrapper>
       <Modal.Body className={"main-body"}>
-        Tem certeza que deseja {type ? "aceitar" : "recusar"} a proposta de {target}?
+       <p>Tem certeza que deseja {type ? "aceitar" : "recusar"} a proposta de {target}?</p>
         <Row>
           <Col lg={6} xs>
             <div onClick={() => handleClose(true)}>

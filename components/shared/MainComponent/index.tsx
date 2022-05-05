@@ -34,7 +34,7 @@ const MainComponent: React.FC = ({ children }) => {
           >
             Logout
           </span>
-          <img src="avatar.svg" onClick={() => router.push('/Profile')} />
+          <img src="/avatar.svg" onClick={() => router.push('/Profile')} />
           <span className="avatar">{name}</span>
         </LoggedInUser>
       </Header>
