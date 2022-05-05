@@ -21,7 +21,7 @@ const CardRent: React.FC<CardProps> = ({ rent }) => {
   return (
     <>
       <CardContainer>
-        <Title>{shorten(rent.title, 10)}</Title>
+        <Title>{shorten(rent.title, 24)}</Title>
         <Paragraph>{shorten(rent.description, 120)}</Paragraph>
         <ButtonsContainer>
           <DetailsBtn

@@ -1,15 +1,18 @@
 import CardAdmin from 'components/CardAdmin'
+import AuthState from 'dtos/AuthState'
 import Books from 'dtos/Books'
 import { Col, Row } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import * as S from './styles'
 
 type Props = {
   book: Books
 }
 const BookedCard: React.FC<Props> = ({ book }) => {
+  const { profile } = useSelector((state: AuthState) => state.auth.loggedUser)
 
   const value = book.accepted
-  const isAdmin = book.admin
+  const isAdmin = profile !== "paciente"
 
   if (isAdmin) {
     return <CardAdmin book={book} />

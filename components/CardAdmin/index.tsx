@@ -1,4 +1,4 @@
-import AdminDeleteModal from 'components/shared/AdminConfirmationModal'
+import AdminModal from 'components/shared/AdminConfirmationModal'
 import Books from 'dtos/Books'
 import { useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
@@ -22,7 +22,7 @@ const CardAdmin: React.FC<Props> = ({ book }) => {
 
   return (
     <S.CardWrapper>
-     <AdminDeleteModal type={accepted} show={show} handleClose={handleOnClose} target={book.user.name} />
+     <AdminModal type={accepted} show={show} handleClose={handleOnClose} target={book.user.name} />
       <Row className="main-title">
         <i className="fa fa-check-circle" style={{ color: 'green' }}></i>
         <h2>Pedido recebido</h2>
