@@ -1,5 +1,5 @@
 import api from './api';
-import RoomRent from '../dtos/RoomRent';
+import RoomRent, { Rent } from '../dtos/RoomRent';
 import Meta from 'dtos/Meta';
 
 interface RoomRentsIndexData {
@@ -14,7 +14,12 @@ const RentService = {
 
   show(id: number) {
     return api.get<RoomRent>(`/storefront/v1/room_rents/${id}`).then(resp => resp.data);
+  },
+
+  create: (room_rent: Rent) => {
+    return api.post<void>('/especialista/v1/room_rents', room_rent);
   }
+
 }
 
 export default RentService;
