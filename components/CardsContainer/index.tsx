@@ -55,7 +55,7 @@ const CardContainer: React.FC<Privilege> = ({ profile }) => {
   return (
     <>
       <CardsContainerTag>
-        {!data ? <Loader /> : data?.rooms.map(room => <CardRoom room={room} />)}
+        {!data ? <Loader /> : data?.rooms.map(room => <CardRoom key={room.name} room={room} />)}
       </CardsContainerTag>
       <Pagination {...data?.meta!} />
     </>
