@@ -3,8 +3,12 @@ import media from 'styled-media-query'
 
 export const ModalWrapper = styled.div``
 
-export const BackDrop = styled.div`
-  ${({ theme }) => css`
+type isNotPacient = {
+  isNotPacient: boolean
+}
+
+export const BackDrop = styled.div<isNotPacient>`
+  ${({ theme, isNotPacient }) => css`
     position: fixed;
     top: 0;
     left: 0;
@@ -24,7 +28,7 @@ export const BackDrop = styled.div`
       border: 2px solid ${theme.colors.gray};
       border-radius: ${theme.border.radius};
       margin-left: ${theme.spacings.xsmall};
-      padding-top: calc(${theme.spacings.large} * 1.25);
+      padding-top: calc(${isNotPacient ? theme.spacings.xsmall : theme.spacings.large} * 1.25);
       max-width: calc(${theme.grid.container} / 4.5);
     }
 
@@ -57,5 +61,7 @@ export const BackDrop = styled.div`
       margin-left: ${theme.spacings.small};
       margin-right: ${theme.spacings.small};
     }
+
+
   `}
 `
