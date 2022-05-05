@@ -2,13 +2,24 @@ import {
   createGlobalStyle,
   css,
   DefaultTheme,
-  GlobalStyleComponent
+  GlobalStyleComponent,
+  keyframes
 } from 'styled-components'
 
 type GlobalStylesProps = {
   defaultHeader?: boolean
 }
 
+const anim = keyframes`
+0% {
+   opacity: 0.4;
+   transform: scale(0, 0);
+ }
+ 100% {
+   opacity: 1;
+   transform: scale(1, 1);
+ }
+`
 const GlobalStyles: GlobalStyleComponent<
   Partial<DefaultTheme>,
   GlobalStylesProps
@@ -19,6 +30,12 @@ const GlobalStyles: GlobalStyleComponent<
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    #modal-portal {
+    .modal-content{
+    animation: ${anim} 0.4s ease-out;
+    }
+  }
     &::before,
     &::after {
       box-sizing: inherit;
