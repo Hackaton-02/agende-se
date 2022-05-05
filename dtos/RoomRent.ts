@@ -8,9 +8,12 @@ export default interface RoomRent {
   user: User
   room: Room
   price: number
-  created_at: Date
-  updated_at: Date
+  created_at?: Date
+  updated_at?: Date
   description: string
   title: string
+  payment_attributes?: { amount: number; method: string; date: Date }
   especialization: string
 }
+
+export type Rent = Pick<RoomRent, "started_at" | "finish_at" | "payment_attributes" | "user">
