@@ -10,7 +10,7 @@ const BookedContainer: React.FC<Props> = ({ books }) => {
   return (
     <CardsContainerTag>
       {books.map(book => (
-        <BookedCard book={book} />
+        <BookedCard key={book.user.id} book={book} />
       ))}
     </CardsContainerTag>
   )
