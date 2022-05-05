@@ -68,7 +68,8 @@ api.interceptors.request.use((req) => {
   if (
     req?.url?.includes("admin") ||
     req?.url?.includes("storefront") ||
-    req?.url?.includes("auth/v1/user")
+    req?.url?.includes("auth/v1/user") ||
+    req?.url?.includes("especialista")
   ) {
     const apiDataCookie = Cookie.get("api-agendese");
 
