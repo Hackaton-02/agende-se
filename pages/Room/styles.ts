@@ -1,10 +1,31 @@
-import { HeaderContainer } from 'components/Header/styles'
-import styled, { css } from 'styled-components'
+import { BackDrop, ModalWrapper } from 'components/Modal/styles'
+import styled, { css, keyframes } from 'styled-components'
 import media from 'styled-media-query'
 import { Container } from '../../components/Container'
 
 export const Main = styled.main`
-    margin-top: 23rem;
+  margin-top: 23rem;
+
+  .features-right {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .features-left {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .time-left {
+    display: flex;
+    flex-direction: column;
+    height: 120%;
+  }
+
+  .time-text {
+    text-align: left;
+    width: 280px;
+  }
 
   ${media.lessThan('medium')`
     margin-top: 15rem;
@@ -13,11 +34,11 @@ export const Main = styled.main`
     box-shadow: 19.373px 19.373px 15.4984px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     border: none;
-    margin-top: 35px;
+    margin-top: 25px;
     margin-bottom: 35px;
   }
 
- & .user-info .row {
+  & .user-info .row {
     margin-bottom: 20px;
   }
 
@@ -55,22 +76,33 @@ export const Main = styled.main`
   }
 `
 
-export const Cover = styled.div`
-  position: absolute;
-  top: 73px;
-  right: 0;
-  left: 0;
-  height: 39.5rem;
-  opacity: 0.3;
-  background-image: url('/image-city.svg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+type Random = {
+  url: string
+  isRandom?: boolean
+}
 
-  ${media.greaterThan('medium')`
+export const Cover = styled.div<Random>`
+  ${({ theme, isRandom = true, url }) => css`
+    position: absolute;
+    top: 73px;
+    right: 0;
+    left: 0;
+    height: 39.5rem;
+    opacity: 0.3;
+    background-image: url(${isRandom ? url : '/image-city.svg'});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    ${media.greaterThan('medium')`
       height: 28rem;
       clip-path: polygon(0% 0%, 0 93%, 100% 74%, 100% 0%);
     `}
+    ${media.lessThan('medium')`
+       width: 130vw;
+
+    `}
+  `}
 `
 
 const Section = styled(Container).attrs({ as: 'section' })`
@@ -87,20 +119,23 @@ export const SectionRoomInfo = styled(Section)``
 export const Wrapper = styled.div`
   overflow: hidden;
 
-  .datapicker-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    ${media.lessThan('medium')`
-    align-items: center;
-
-    `}
-  }
-
-  ${HeaderContainer} {
+  .features-right {
     p {
-      margin-bottom: 0 !important;
+      margin-bottom: 15px !important;
     }
   }
+
+  ${media.lessThan('medium')`
+    align-items: center;
+
+    .features-left {
+    justify-content: center;
+  }
+
+    .features-right {
+      justify-content: flex-end;
+      width: 90%;
+
+    }
+    `}
 `
