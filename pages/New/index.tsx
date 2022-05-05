@@ -3,11 +3,15 @@ import LoggedInUser from 'components/LoggedInUser'
 import Logo from 'components/Logo'
 import Menu from 'components/Menu'
 import Container from 'components/NewRoom'
+import AuthState from 'dtos/AuthState'
 import { NextPage } from 'next'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 import * as S from './styles'
 
 const New: NextPage = () => {
+  const { name } = useSelector((state: AuthState) => state.auth.loggedUser)
+
   return (
     <S.Wrapper>
       <Header>
@@ -20,7 +24,7 @@ const New: NextPage = () => {
         <LoggedInUser>
           <span className="logout">Logout</span>
           <img src="avatar.svg" />
-          <span className="avatar">{'John Smith'}</span>
+          <span className="avatar">{name}</span>
         </LoggedInUser>
       </Header>
       <Menu />
