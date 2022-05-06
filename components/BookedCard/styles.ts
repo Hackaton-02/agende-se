@@ -75,14 +75,14 @@ ${({ theme, accepted }) => css`
   margin-bottom: 1.5rem;
 
   p {
-    background: ${accepted === "pending" && "#fdba74" || accepted === "accepted" && "#86EFAC" || "red"};
+    background: ${accepted === "pending" && "#fdba74" || accepted === "agreed" && "#86EFAC" || "red"};
     border-radius: 8px;
     font-weight: 700;
     font-size: 14px;
     line-height: 150%;
     width: 85px;
     padding: 0.4rem;
-    color: ${accepted === "accepted" && "#14532D" || accepted === "rejected" && "#fff" || "black"} ;
+    color: ${accepted === "agreed" && "#14532D" || accepted === "rejected" && "#fff" || "black"} ;
   }
   `}
 `

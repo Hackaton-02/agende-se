@@ -22,11 +22,11 @@ const CardRoom: React.FC<CardProps> = ({ room }) => {
     <>
       <CardContainer>
         <Title>{room.name}</Title>
-        <Paragraph>
-          {shorten(room.description, 120)}
-        </Paragraph>
+        <Paragraph>{shorten(room.description, 120)}</Paragraph>
         <ButtonsContainer>
-          <DetailsBtn onClick={() => router.push(`/Room/${room.id}`)}>Ver detalhes</DetailsBtn>
+          <DetailsBtn onClick={() => router.push(`/Room/${room.id}`)}>
+            Ver detalhes
+          </DetailsBtn>
           <Price>
             <img src="price-tag.svg" />
             {priceFormat(room.price)}/dia
