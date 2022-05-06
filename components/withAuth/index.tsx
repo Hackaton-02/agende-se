@@ -1,40 +1,43 @@
-import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Cookie from 'js-cookie';
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import Cookie from 'js-cookie'
 
-import AuthState from 'dtos/AuthState';
-import User from 'dtos/User';
-import ApiData from 'dtos/ApiData';
+import AuthState from 'dtos/AuthState'
+import User from 'dtos/User'
+import ApiData from 'dtos/ApiData'
 
-const withAuth = (Component) => {
-  const Auth = (props) => {
-    const router = useRouter();
-    const loggedUser: User = useSelector((state: AuthState) => state.auth.loggedUser);
+const withAuth = Component => {
+  const Auth = props => {
+    const router = useRouter()
+    const loggedUser: User = useSelector(
+      (state: AuthState) => state.auth.loggedUser
+    )
 
-    const apiDataCookie = Cookie.get('api-agendese');
-    const apiData: ApiData = apiDataCookie ? JSON.parse(apiDataCookie) : null;
+    const apiDataCookie = Cookie.get('api-agendese')
+    const apiData: ApiData = apiDataCookie ? JSON.parse(apiDataCookie) : null
 
-    if (!loggedUser ||
-        !apiData ||
-        !apiData['access-token'] ||
-        apiData['access-token'] === ''
-      ) {
-        router.push({
-          pathname: '/',
-          query: {
-            callback: router.pathname
-          }
-        });
-      }
+    if (
+      !loggedUser ||
+      !apiData ||
+      !apiData['access-token'] ||
+      apiData['access-token'] === ''
+    ) {
+      router.push({
+        pathname: '/',
+        query: {
+          callback: router.pathname
+        }
+      })
+    }
 
-      return <Component {...props}/>;
+    return <Component {...props} />
   }
 
   if (Component.getServerSideProps) {
-    Auth.getServerSideProps = Component.getServerSideProps;
+    Auth.getServerSideProps = Component.getServerSideProps
   }
 
-  return Auth;
+  return Auth
 }
 
-export default withAuth;
+export default withAuth

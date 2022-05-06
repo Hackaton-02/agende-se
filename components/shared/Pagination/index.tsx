@@ -1,27 +1,27 @@
-import { useState, useEffect, HtmlHTMLAttributes } from "react";
-import * as S from "./styles"
-import StyledButton from "../StyledButton";
-import PaginationService from "utils/PaginationService";
+import { useState, useEffect, HtmlHTMLAttributes } from 'react'
+import * as S from './styles'
+import StyledButton from '../StyledButton'
+import PaginationService from 'utils/PaginationService'
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 type PaginationProps = HtmlHTMLAttributes<HTMLDivElement> & {
-  page: number;
-  total_pages: number;
-};
+  page: number
+  total_pages: number
+}
 const Pagination: React.FunctionComponent<PaginationProps> = ({
   page,
   total_pages,
   ...rest
 }) => {
-  const [pagination, setPagination] = useState(["1"]);
-  const router = useRouter();
+  const [pagination, setPagination] = useState(['1'])
+  const router = useRouter()
 
   //sempre que o total_pages mudar, o array de listagem também deverá mudar
   useEffect(() => {
-    setPagination(PaginationService.execute(total_pages, page));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total_pages]);
+    setPagination(PaginationService.execute(total_pages, page))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total_pages])
 
   // método utilizado para tratar a seleção das páginas
   const handlePageClick = (page: string): void => {
@@ -29,10 +29,10 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
       pathname: router.pathname,
       query: {
         ...router.query,
-        page: page,
-      },
-    });
-  };
+        page: page
+      }
+    })
+  }
 
   // método para tratar a seleção da página posterior a atual
   const handleNextPageClick = (): void => {
@@ -41,11 +41,11 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
         pathname: router.pathname,
         query: {
           ...router.query,
-          page: page + 1,
-        },
-      });
+          page: page + 1
+        }
+      })
     }
-  };
+  }
 
   // método para tratar a seleção da página anterior a atual
   const handlePreviusPageClick = (): void => {
@@ -54,14 +54,17 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
         pathname: router.pathname,
         query: {
           ...router.query,
-          page: page - 1,
-        },
-      });
+          page: page - 1
+        }
+      })
     }
-  };
+  }
 
   return (
-    <S.PaginationWrapper className="pagination justify-content-center" {...rest}>
+    <S.PaginationWrapper
+      className="pagination justify-content-center"
+      {...rest}
+    >
       <div className="pagination">
         <StyledButton
           action="<"
@@ -72,8 +75,8 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
         {
           // quando o item do array da páginação for '...' será apenas renderizado o texto '...', caso contrário será renderizado um botão com os números das páginas
           pagination.map((item, index) =>
-            item === "..." ? (
-              "..."
+            item === '...' ? (
+              '...'
             ) : (
               <StyledButton
                 key={index}
@@ -93,7 +96,7 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
         />
       </div>
     </S.PaginationWrapper>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

@@ -1,7 +1,4 @@
 import api from './api';
-import RoomRent from 'dtos/RoomRent';
-
-
 interface ConsultIndexData {
   range: [Date]
 }

@@ -16,7 +16,7 @@ const MainComponent: React.FC = ({ children }) => {
   return (
     <S.Wrapper className="d-flex flex-column sticky-footer-wrapper">
       <Header>
-      <Link href="/Dashboard">
+        <Link href="/Dashboard">
           <a>
             <Logo size="small" />
           </a>

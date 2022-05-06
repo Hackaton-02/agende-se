@@ -64,51 +64,50 @@ const Menu: React.FC = () => {
       </Row>
       {isAdmin && (
         <>
-        <Row>
-          <Col onClick={() => router.push('/Users')}>
-            <UserIcon
-              color={
-                router.pathname === '/Users'
-                  ? theme.colors.primary
-                  : theme.colors.white
+          <Row>
+            <Col onClick={() => router.push('/Users')}>
+              <UserIcon
+                color={
+                  router.pathname === '/Users'
+                    ? theme.colors.primary
+                    : theme.colors.white
+                }
+              />
+            </Col>
+            <Col>
+              <p
+                style={
+                  router.pathname === '/Users'
+                    ? { color: theme.colors.primary }
+                    : { color: theme.colors.white }
+                }
+              >
+                Usuários
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <i
+              className="fa fa-plus-circle"
+              onClick={() => router.push('/New')}
+              style={
+                router.pathname === '/New'
+                  ? { color: theme.colors.primary }
+                  : { color: theme.colors.white }
               }
             />
-          </Col>
-          <Col>
             <p
               style={
-                router.pathname === '/Users'
+                router.pathname === '/New'
                   ? { color: theme.colors.primary }
                   : { color: theme.colors.white }
               }
             >
-              Usuários
+              Cadastrar sala
             </p>
-          </Col>
-        </Row>
-           <Row>
-           <i
-             className="fa fa-plus-circle"
-             onClick={() => router.push('/New')}
-             style={
-               router.pathname === '/New'
-                 ? { color: theme.colors.primary }
-                 : { color: theme.colors.white }
-             }
-           />
-           <p
-             style={
-               router.pathname === '/New'
-                 ? { color: theme.colors.primary }
-                 : { color: theme.colors.white }
-             }
-           >
-             Cadastrar sala
-           </p>
-         </Row>
-         </>
+          </Row>
+        </>
       )}
-
     </S.Wrapper>
   )
 }

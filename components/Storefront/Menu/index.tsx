@@ -1,10 +1,10 @@
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap'
 
-import styles from './styles.module.css';
-import Link from 'next/link';
+import styles from './styles.module.css'
+import Link from 'next/link'
 
 interface MenuProps {
-  tab?: string;
+  tab?: string
 }
 
 const Menu: React.FC<MenuProps> = ({ tab }) => {
@@ -12,15 +12,15 @@ const Menu: React.FC<MenuProps> = ({ tab }) => {
     <Row className={`mt-4 mb-4 text-center ${styles.container}`}>
       <Col sm={3} xs={6}>
         <Link href="/Profile">
-          <a className={(tab === 'personal_data' ? styles.active : undefined)}>
+          <a className={tab === 'personal_data' ? styles.active : undefined}>
             Meus Dados
           </a>
         </Link>
       </Col>
 
       <Col sm={3} xs={6}>
-      <Link href="/List">
-          <a className={(tab === 'orders' ? styles.active : undefined)}>
+        <Link href="/List">
+          <a className={tab === 'orders' ? styles.active : undefined}>
             Minhas reservas
           </a>
         </Link>
@@ -28,7 +28,7 @@ const Menu: React.FC<MenuProps> = ({ tab }) => {
 
       <Col sm={3} xs={6}>
         <Link href="/Consult">
-          <a className={(tab === 'my_consults' ? styles.active : undefined)}>
+          <a className={tab === 'my_consults' ? styles.active : undefined}>
             Minhas consultas
           </a>
         </Link>
@@ -36,13 +36,13 @@ const Menu: React.FC<MenuProps> = ({ tab }) => {
 
       <Col sm={3} xs={6}>
         <Link href="/Address">
-          <a className={(tab === 'my_address' ? styles.active : undefined)}>
+          <a className={tab === 'my_address' ? styles.active : undefined}>
             Meu endereço
           </a>
         </Link>
       </Col>
     </Row>
-  );
+  )
 }
 
-export default Menu;
+export default Menu

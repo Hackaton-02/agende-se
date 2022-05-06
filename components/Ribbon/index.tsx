@@ -1,6 +1,6 @@
 export type RibbonColors = 'lightBlue' | 'secondary'
 export type RibbonSize = 'normal' | 'small'
-import * as S from "./styles"
+import * as S from './styles'
 export type RibbonProps = {
   children: React.ReactNode
   color?: RibbonColors
