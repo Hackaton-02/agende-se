@@ -8,6 +8,14 @@ export const CardWrapper = styled.div`
   padding: 15px 35px;
   margin-bottom: 1.5rem;
 
+  .dates {
+    margin-top: 15px;
+  }
+
+   h5.dates {
+    margin-left: 15px;
+  }
+
   .text {
     font-family: 'Abhaya Libre';
     font-style: normal;

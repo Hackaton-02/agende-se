@@ -1,7 +1,7 @@
 import * as S from './styles'
 const Loader: React.FC = () => {
   return (
-    <S.LoaderWrapper className='loading'>
+    <S.LoaderWrapper className="loading">
       <svg
         width="300px"
         height="200px"
