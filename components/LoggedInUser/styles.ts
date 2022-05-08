@@ -23,7 +23,9 @@ export const UserNameText = styled.p`
   img,
   svg {
     cursor: pointer;
+  ${media.greaterThan("medium")`
     animation: loader 1.2s linear forwards;
+    `}
   }
 
   .logout {
@@ -45,7 +47,7 @@ export const UserNameText = styled.p`
   .avatar {
     color: white;
   }
-  
+
   ${media.lessThan('medium')`
     margin-right: 15vw;
   `}

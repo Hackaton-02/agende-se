@@ -41,7 +41,11 @@ const TableUsers: React.FC = () => {
           </thead>
 
           <tbody>
-            {!data && <Loader />}
+            {!data && (
+              <div style={{ margin: '10px 20vw' }}>
+                <Loader />
+              </div>
+            )}
             {users?.map(user => (
               <tr>
                 <td>{user.name}</td>

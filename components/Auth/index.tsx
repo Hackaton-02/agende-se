@@ -10,13 +10,15 @@ import * as S from './styles'
 
 export const EmailPassword = (
   hideEmail: boolean = false,
-  hidePassword: boolean = false
+  hidePassword: boolean = false,
+  isReset: boolean = true
 ) => ({
   email: {
     helperText: 'email inválido ou obrigatório',
     placeholder: 'Insira seu email',
     type: 'email',
     required: true,
+    reset: isReset,
     hidden: hideEmail,
     label: 'Email'
   },
@@ -39,12 +41,13 @@ const Auth = () => {
     name: '',
     email: '',
     password: '',
-    confirmation: ''
+    confirmation: '',
+    phone: ''
   })
   const [isSignup, setIsSignup] = useState(false)
   const commom = EmailPassword(false, false)
 
-  const { password, email } = EmailPassword(false, false)
+  const { password, email } = EmailPassword(false, false, false)
 
   const newFields = {
     name: {
@@ -61,20 +64,47 @@ const Auth = () => {
       label: 'Confirmar Senha',
       helperText: 'A confirmação da senha é obrigatória',
       required: true
+    },
+    phone: {
+      type: 'text',
+      placeholder: 'Digite seu telefone',
+      label: 'Contato',
+      helperText: 'O telefone é obrigatório.',
+      required: true
     }
   }
 
   const fields = isSignup ? newFields : commom
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
-    // const form: any = event?.currentTarget
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault()
-    //   event.stopPropagation()
-    // }
+    const form: any = document.querySelector('form')
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+      setValidated(true)
+
+      return
+    }
+    event?.preventDefault()
 
     setValidated(true)
-    const { email, password } = values
+    const { email, password, phone } = values
+    if (isSignup) {
+      try {
+        UsersService.signUp({
+          name: values.name,
+          email,
+          password,
+          phone,
+          password_confirmation: values.confirmation
+        })
+        toast.success('Usuário cadastrado com sucesso!')
+      } catch (error) {
+        console.log(error)
+        toast.error('Não foi possível cadastrar seu usuário...')
+      }
+      return
+    }
 
     try {
       const response = await UsersService.signIn({ email, password })
@@ -138,6 +168,7 @@ const Auth = () => {
               error={isError}
               onLogin={handleSubmit as any}
               isValid={isValid!}
+              isSignup={isSignup}
             />
             <p
               className="link-text"

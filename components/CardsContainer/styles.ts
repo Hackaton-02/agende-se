@@ -1,4 +1,5 @@
 import { CardContainer } from 'components/Card/styles'
+import { CardContainer as AdminCard } from 'components/CardRoom/styles'
 import styled, { css } from 'styled-components'
 
 export const CardsContainerTag = styled.div`
@@ -14,7 +15,7 @@ export const CardsContainerTag = styled.div`
     flex-wrap: wrap;
 
     @media (min-width: 577px) {
-      ${CardContainer} {
+      ${CardContainer}, ${AdminCard} {
         transition: transform 0.5s;
         &:hover {
           transform: scale(1.1);

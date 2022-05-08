@@ -50,6 +50,7 @@ export const Wrapper = styled.div`
       margin-left: 70px;
       border: none;
       padding-left: 20px;
+      margin-bottom: 5px;
 
       &:invalid {
         animation: shake ease-out 0.3s;
@@ -117,7 +118,6 @@ export const TextContainer = styled.div`
 export const FieldsContainer = styled.div`
   ${({ theme }) => css`
     width: 703px;
-    min-height: 370px;
     height: auto;
     background: ${theme.colors.white};
     position: absolute;
@@ -130,6 +130,11 @@ export const FieldsContainer = styled.div`
       cursor: pointer;
       margin-bottom: 10px;
       margin-top: 20px;
+    }
+
+    a.link-text {
+      margin-left: 12%;
+      color: grey;
     }
     &.paragraph {
       & p {
