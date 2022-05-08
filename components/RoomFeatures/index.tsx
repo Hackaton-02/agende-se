@@ -5,7 +5,13 @@ type Props = {
   room: Room
 }
 
-const RoomFeatures = ({ room: { features: { internet, airConditioned, roomCleaning, bathroom, furnished }} }: Props) => {
+const RoomFeatures = ({ room }: Props) => {
+
+  const internet = room.features?.internet ?? false
+  const bathroom = room.features?.bathroom ?? false
+  const airConditioned = room.features?.airConditioned ?? false
+  const furnished = room.features?.furnished ?? false
+  const roomCleaning = room.features?.roomCleaning ?? false
 
 
   return (
