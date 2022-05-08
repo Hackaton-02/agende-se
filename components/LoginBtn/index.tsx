@@ -7,9 +7,15 @@ type LoginBtnProps = {
   isValid: boolean
   onLogin: () => void
   error: boolean
+  isSignup: boolean
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ isValid, onLogin, error }) => {
+const LoginBtn: React.FC<LoginBtnProps> = ({
+  isValid,
+  onLogin,
+  error,
+  isSignup
+}) => {
   const router = useRouter()
 
   return (
@@ -34,14 +40,18 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid, onLogin, error }) => {
       onClick={(e: { preventDefault: () => void }) => {
         if (!isValid) return
         e.preventDefault()
-        const container = document.querySelector('.container')!
-        const p = document.querySelector(`${FieldsContainer}`)
-        p?.classList.toggle('paragraph')
-        container.classList.toggle('activebtn')
+
+        if (isSignup === false) {
+          const container = document.querySelector('.container')!
+          const p = document.querySelector(`${FieldsContainer}`)
+          p?.classList.toggle('paragraph')
+          container.classList.toggle('activebtn')
+        }
+
         onLogin()
       }}
     >
-      <span className="text">Entrar </span>
+      <span className="text">{isSignup ? 'Cadastrar' : 'Entrar'} </span>
       <svg
         className="fingerprint fingerprint-base"
         xmlns="http://www.w3.org/2000/svg"
@@ -244,7 +254,6 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ isValid, onLogin, error }) => {
             stroke="#fff"
             strokeWidth="6"
           />
-          )
         </svg>
       )}
     </S.Wrapper>
