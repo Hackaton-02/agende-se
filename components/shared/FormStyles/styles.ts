@@ -1,7 +1,6 @@
-import { BackDrop, ModalWrapper } from 'components/Modal/styles'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-import { Container } from '../../components/Container'
+import { Container } from '../../Container'
 
 export const Main = styled.main`
   margin-top: 23rem;
@@ -138,4 +137,27 @@ export const Wrapper = styled.div`
 
     }
     `}
+`
+
+export const FormWrapper = styled.div`
+  .blue_text {
+    color: #00cfff;
+  }
+
+  .input_background {
+    background-color: #212744;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .input_background:focus {
+    background-color: #212744;
+    color: white;
+  }
+
+  .form input,
+  .form input:focus {
+    color: white;
+  }
 `

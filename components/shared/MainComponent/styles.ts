@@ -22,3 +22,5 @@ export const Wrapper = styled.div`
     color: white;
   }
 `
+
+
