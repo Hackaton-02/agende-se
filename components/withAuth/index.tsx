@@ -7,12 +7,11 @@ import User from 'dtos/User'
 import ApiData from 'dtos/ApiData'
 import { AppProps } from 'next/app'
 import { GetServerSideProps } from 'next'
+import { ReactNode } from 'react'
 
-type Props = AppProps & {
-  Component: { getServerSideProps: GetServerSideProps }
-}
-const withAuth = ({ Component }: Props) => {
-  const Auth = ({ pageProps }: AppProps) => {
+type Props = AppProps & { Component: { getServerSideProps: GetServerSideProps }}
+const withAuth = ({ Component }: Props)  => {
+  const Auth = (props: JSX.IntrinsicAttributes & { children?: ReactNode }) => {
     const router = useRouter()
     const loggedUser: User = useSelector(
       (state: AuthState) => state.auth.loggedUser
@@ -35,7 +34,7 @@ const withAuth = ({ Component }: Props) => {
       })
     }
 
-    return <Component {...pageProps} />
+    return <Component {...props} />
   }
 
   if (Component.getServerSideProps) {
