@@ -1,6 +1,7 @@
 import MainComponent from 'components/shared/MainComponent'
 import NoData from 'components/shared/NoData'
 import Menu from 'components/Storefront/Menu'
+import { GetServerSidePropsContext } from 'next'
 
 const Consult: React.FC = () => {
   return (
@@ -12,3 +13,19 @@ const Consult: React.FC = () => {
 }
 
 export default Consult
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['api-agendese']
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

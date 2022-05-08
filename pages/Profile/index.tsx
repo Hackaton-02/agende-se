@@ -5,17 +5,20 @@ import MainComponent from 'components/shared/MainComponent'
 import Menu from 'components/Storefront/Menu'
 import StyledButton from 'components/shared/StyledButton'
 
-import withAuth from '../../components/withAuth'
 import { useSelector, useDispatch } from 'react-redux'
 import User from '../../dtos/User'
 import { setLoggedUser } from '../../store/modules/auth/reducer'
-import ApiResponseError from "dtos/ApiResponseError"
+import ApiResponseError from 'dtos/ApiResponseError'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import ProfileService from 'services/profile'
 import AuthState from 'dtos/AuthState'
 import { FormWrapper } from 'pages/Address/styles'
-import { NextComponentType, NextPageContext } from 'next'
+import {
+  GetServerSidePropsContext,
+  NextComponentType,
+  NextPageContext
+} from 'next'
 
 const Profile: NextComponentType<NextPageContext, any, {}> = () => {
   const user: User = useSelector((state: AuthState) => state.auth.loggedUser)
@@ -58,7 +61,6 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
       const err: ApiResponseError = error.response.data.errors.full_messages[0]
       toast.error(err)
       console.log(error)
-
     } finally {
       setPassword('')
       setPasswordConfirmation('')
@@ -69,18 +71,18 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
     <MainComponent>
       <Menu tab="personal_data" />
       <FormWrapper>
-        <Form className={"form"} onSubmit={handleFormSubmit}>
+        <Form className={'form'} onSubmit={handleFormSubmit}>
           <BlueBackground>
             <div>
               <strong className="d-block">{user.name}</strong>
-              <span className={"blue_text"}>{user.email} </span>
+              <span className={'blue_text'}>{user.email} </span>
             </div>
 
             <Row className="mt-4">
               <Col xs={12}>
                 <div>
                   <span className="d-block">Informações Pública</span>
-                  <small className={"blue_text"}>
+                  <small className={'blue_text'}>
                     Essas informações serão exibidas publicamente
                   </small>
 
@@ -88,7 +90,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                     <Form.Label>Nome</Form.Label>
                     <Form.Control
                       placeholder="Nome de exibição"
-                      className={"input_background"}
+                      className={'input_background'}
                       value={name}
                       onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
                         setName(evt.target.value)
@@ -102,7 +104,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
             <Row className="mb-4">
               <Col>
                 <span className="d-block">Informações Pessoais</span>
-                <small className={"blue_text"}>
+                <small className={'blue_text'}>
                   Essas informações NÃO serão exibidas publicamente
                 </small>
 
@@ -111,7 +113,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                     <Form.Label>E-mail</Form.Label>
                     <Form.Control
                       placeholder="E-mail"
-                      className={"input_background"}
+                      className={'input_background'}
                       type="email"
                       value={email}
                       onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
@@ -124,7 +126,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                     <Form.Label>Telefone</Form.Label>
                     <Form.Control
                       placeholder="Telefone"
-                      className={"input_background"}
+                      className={'input_background'}
                       type="phone"
                       value={phone}
                       onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
@@ -136,8 +138,8 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                   <Form.Label>Whatsapp</Form.Label>
                   <Form.Select
                     placeholder="Whatsapp"
-                    className={"input_background"}
-                    value={!!whatsapp ? "SIM" : "NÃO"}
+                    className={'input_background'}
+                    value={!!whatsapp ? 'SIM' : 'NÃO'}
                     onChange={(evt: React.ChangeEvent<HTMLSelectElement>) =>
                       setWhatsapp(!whatsapp) as any
                     }
@@ -150,7 +152,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                     <Form.Label>Senha</Form.Label>
                     <Form.Control
                       placeholder="Senha"
-                      className={"input_background"}
+                      className={'input_background'}
                       type="password"
                       value={password}
                       onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
@@ -163,7 +165,7 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
                     <Form.Label>Repetir Senha</Form.Label>
                     <Form.Control
                       placeholder="Repetir Senha"
-                      className={"input_background"}
+                      className={'input_background'}
                       type="password"
                       value={passwordConfirmation}
                       onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
@@ -190,4 +192,20 @@ const Profile: NextComponentType<NextPageContext, any, {}> = () => {
   )
 }
 
-export default withAuth(Profile as any)
+export default Profile
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['api-agendese']
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}
