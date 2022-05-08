@@ -5,9 +5,14 @@ import Cookie from 'js-cookie'
 import AuthState from 'dtos/AuthState'
 import User from 'dtos/User'
 import ApiData from 'dtos/ApiData'
+import { AppProps } from 'next/app'
+import { GetServerSideProps } from 'next'
 
-const withAuth = Component => {
-  const Auth = props => {
+type Props = AppProps & {
+  Component: { getServerSideProps: GetServerSideProps }
+}
+const withAuth = ({ Component }: Props) => {
+  const Auth = ({ pageProps }: AppProps) => {
     const router = useRouter()
     const loggedUser: User = useSelector(
       (state: AuthState) => state.auth.loggedUser
@@ -30,7 +35,7 @@ const withAuth = Component => {
       })
     }
 
-    return <Component {...props} />
+    return <Component {...pageProps} />
   }
 
   if (Component.getServerSideProps) {
