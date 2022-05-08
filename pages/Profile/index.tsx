@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 import ProfileService from 'services/profile'
 import AuthState from 'dtos/AuthState'
-import { FormWrapper } from 'pages/Address/styles'
+import { FormWrapper } from 'components/shared/FormStyles/styles'
 import {
   GetServerSidePropsContext,
   NextComponentType,

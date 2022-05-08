@@ -6,13 +6,13 @@ import User from 'dtos/User'
 import { useEffect, useState } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import * as S from './styles'
 import useSWR from 'swr'
 import AddressService from 'services/address'
 import Menu from 'components/Storefront/Menu'
 import { toast } from 'react-toastify'
 import Loader from 'components/Loader'
 import { GetServerSidePropsContext } from 'next'
+import { FormWrapper } from 'components/shared/FormStyles/styles'
 
 const MainAdress: React.FC = () => {
   const user: User = useSelector((state: AuthState) => state.auth.loggedUser)
@@ -82,7 +82,7 @@ const MainAdress: React.FC = () => {
       {!data && !error ? (
         <Loader />
       ) : (
-        <S.FormWrapper>
+        <FormWrapper>
           <Form onSubmit={handleFormSubmit}>
             <BlueBackground>
               <Row className="mb-4">
@@ -194,7 +194,7 @@ const MainAdress: React.FC = () => {
               />
             </div>
           </Form>
-        </S.FormWrapper>
+        </FormWrapper>
       )}
     </MainComponent>
   )

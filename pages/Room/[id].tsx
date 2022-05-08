@@ -2,7 +2,7 @@ import RoomInfo from 'components/RoomInfo'
 import DatePicker from 'react-datepicker'
 import RoomFeatures from 'components/RoomFeatures'
 
-import * as S from './styles'
+import * as S from 'components/shared/FormStyles/styles'
 import { Col, Row } from 'react-bootstrap'
 import { GetServerSidePropsContext, NextPage } from 'next'
 import ModalRent from 'components/Modal'
