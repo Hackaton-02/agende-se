@@ -9,7 +9,7 @@ import { AppProps } from 'next/app'
 import { GetServerSideProps } from 'next'
 import { ReactNode } from 'react'
 
-type Props = AppProps & { Component: { getServerSideProps: GetServerSideProps }}
+type Props = AppProps & { Component: { getServerSideProps?: GetServerSideProps }}
 const withAuth = ({ Component }: Props)  => {
   const Auth = (props: JSX.IntrinsicAttributes & { children?: ReactNode }) => {
     const router = useRouter()
