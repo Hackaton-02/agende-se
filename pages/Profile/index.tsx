@@ -15,8 +15,9 @@ import { useState } from 'react'
 import ProfileService from 'services/profile'
 import AuthState from 'dtos/AuthState'
 import { FormWrapper } from 'pages/Address/styles'
+import { NextComponentType, NextPageContext } from 'next'
 
-const Profile: React.FC = () => {
+const Profile: NextComponentType<NextPageContext, any, {}> = () => {
   const user: User = useSelector((state: AuthState) => state.auth.loggedUser)
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
@@ -189,4 +190,4 @@ const Profile: React.FC = () => {
   )
 }
 
-export default withAuth(Profile)
+export default withAuth(Profile as any)

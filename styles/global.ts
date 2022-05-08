@@ -21,10 +21,10 @@ const anim = keyframes`
    transform: scale(1, 1);
  }
 `
-const GlobalStyles: GlobalStyleComponent<
-  Partial<DefaultTheme>,
-  GlobalStylesProps
-> = createGlobalStyle`
+const GlobalStyles: Partial<
+  GlobalStyleComponent<DefaultTheme, GlobalStylesProps>
+> &
+  any = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;

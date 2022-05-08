@@ -10,19 +10,19 @@ type State = {
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { loggedUser: null, apiData: null } as State,
+  initialState: { loggedUser: null, apiData: null } as unknown as State,
   reducers: {
     setLoggedUser(state, action: PayloadAction<User>) {
       state.loggedUser = action.payload
     },
     clearLoggedUser(state) {
-      state.loggedUser = null
+      (state.loggedUser as any) = null
     },
     setApiData(state, action: PayloadAction<ApiData>) {
       state.apiData = action.payload
     },
     clearApiData(state) {
-      state.apiData = null
+      (state.apiData as any) = null
     }
   }
 })
