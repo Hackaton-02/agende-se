@@ -5,6 +5,7 @@ import {
   GlobalStyleComponent,
   keyframes
 } from 'styled-components'
+import media from 'styled-media-query'
 
 type GlobalStylesProps = {
   defaultHeader?: boolean
@@ -33,8 +34,12 @@ const GlobalStyles: GlobalStyleComponent<
 
     #modal-portal {
     .modal-content{
-    animation: ${anim} 0.4s ease-out;
+    ${media.greaterThan('medium')`
+      animation: ${anim} 0.4s ease-out;
+
+      `}
     }
+
   }
     &::before,
     &::after {
