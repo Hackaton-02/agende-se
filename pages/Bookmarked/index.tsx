@@ -4,7 +4,7 @@ import Menu from 'components/Menu'
 import MainComponent from 'components/shared/MainComponent'
 import NoData from 'components/shared/NoData'
 import AuthState from 'dtos/AuthState'
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import BookedService from 'services/booked'
@@ -49,3 +49,19 @@ const Bookmarked: NextPage = () => {
 }
 
 export default Bookmarked
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['api-agendese']
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

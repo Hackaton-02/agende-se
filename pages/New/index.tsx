@@ -4,7 +4,7 @@ import Logo from 'components/Logo'
 import Menu from 'components/Menu'
 import Container from 'components/NewRoom'
 import AuthState from 'dtos/AuthState'
-import { NextPage } from 'next'
+import { GetServerSidePropsContext, NextPage } from 'next'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import * as S from './styles'
@@ -34,3 +34,19 @@ const New: NextPage = () => {
 }
 
 export default New
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['api-agendese']
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

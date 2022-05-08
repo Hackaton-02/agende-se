@@ -12,6 +12,7 @@ import AddressService from 'services/address'
 import Menu from 'components/Storefront/Menu'
 import { toast } from 'react-toastify'
 import Loader from 'components/Loader'
+import { GetServerSidePropsContext } from 'next'
 
 const MainAdress: React.FC = () => {
   const user: User = useSelector((state: AuthState) => state.auth.loggedUser)
@@ -200,3 +201,19 @@ const MainAdress: React.FC = () => {
 }
 
 export default MainAdress
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['api-agendese']
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}
