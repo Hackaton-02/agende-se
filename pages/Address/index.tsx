@@ -3,7 +3,7 @@ import MainComponent from 'components/shared/MainComponent'
 import StyledButton from 'components/shared/StyledButton'
 import AuthState from 'dtos/AuthState'
 import User from 'dtos/User'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import * as S from './styles'
@@ -16,35 +16,58 @@ import Loader from 'components/Loader'
 const MainAdress: React.FC = () => {
   const user: User = useSelector((state: AuthState) => state.auth.loggedUser)
   const { data, error } = useSWR(user.id as any, AddressService.show)
-  const address = data?.address
+  const [address, setAddress] = useState({
+    city: '',
+    complement: '',
+    country: '',
+    state: '',
+    street: '',
+    number: '',
+    zipcode: ''
+  })
 
-  const [city, setCity] = useState(address?.city)
-  const [complement, setComplement] = useState(address?.complement)
-  const [country, setCountry] = useState(address?.country)
-  const [state, setState] = useState(address?.state)
-  const [street, setStreet] = useState(address?.street)
-  const [number, setNumber] = useState(address?.number)
-  const [zipcode, setZipcode] = useState(address?.zipcode)
+  const { city, complement, country, state, street, zipcode, number } = address
 
-  if (error) {
-    toast.error('Erro ao obter dados do seu endereço')
-    console.log(error)
-  }
+  useEffect(() => {
+    !!data && setAddress({ ...data.address })
+  }, [data])
+
+  useEffect(() => {
+    if (error) {
+      toast.error('Não foi possível obter dados do seu endereço')
+      console.log(error)
+    }
+  }, [])
 
   const handleFormSubmit = async (evt: React.FormEvent): Promise<void> => {
     evt.preventDefault()
 
     try {
-      await AddressService.update({
-        city,
-        complement,
-        country,
-        state,
-        street,
-        number,
-        id: address?.id
-      } as any)
+      if (!error) {
+        await AddressService.update({
+          city,
+          complement,
+          country,
+          state,
+          street,
+          zipcode,
+          number,
+          id: user.id
+        } as any)
+      }
 
+      if (!!error) {
+        await AddressService.create({
+          city,
+          complement,
+          country,
+          state,
+          street,
+          zipcode,
+          number,
+          id: user.id
+        } as any)
+      }
       toast.info('Endereço atualizado com sucesso!')
     } catch (error) {
       toast.error('Erro ao atualiar o usuário, tente novamente.')
@@ -55,7 +78,7 @@ const MainAdress: React.FC = () => {
   return (
     <MainComponent>
       <Menu tab="my_address" />
-      {!data ? (
+      {!data && !error ? (
         <Loader />
       ) : (
         <S.FormWrapper>
@@ -76,7 +99,7 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={city}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setCity(evt.target.value)
+                          setAddress({ ...address, city: evt.target.value })
                         }
                       />
                     </Form.Group>
@@ -89,7 +112,10 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={complement}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setComplement(evt.target.value)
+                          setAddress({
+                            ...address,
+                            complement: evt.target.value
+                          })
                         }
                       />
                     </Form.Group>
@@ -100,7 +126,7 @@ const MainAdress: React.FC = () => {
                         className={'input_background'}
                         value={country}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setCountry(evt.target.value)
+                          setAddress({ ...address, country: evt.target.value })
                         }
                       />
                     </Form.Group>
@@ -112,7 +138,7 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={state}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setState(evt.target.value)
+                          setAddress({ ...address, state: evt.target.value })
                         }
                       />
                     </Form.Group>
@@ -125,7 +151,7 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={street}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setStreet(evt.target.value)
+                          setAddress({ ...address, street: evt.target.value })
                         }
                       />
                     </Form.Group>
@@ -137,7 +163,7 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={number}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setNumber(evt.target.value)
+                          setAddress({ ...address, number: evt.target.value })
                         }
                       />
                     </Form.Group>
@@ -149,7 +175,7 @@ const MainAdress: React.FC = () => {
                         type="text"
                         value={zipcode}
                         onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
-                          setZipcode(evt.target.value)
+                          setAddress({ ...address, zipcode: evt.target.value })
                         }
                       />
                     </Form.Group>
