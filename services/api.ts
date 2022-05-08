@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Router from "next/router";
 
 const api = axios.create({
-  baseURL: process.env.BASE_API_URL ?? "http://localhost:3000",
+  baseURL: "https://agende-se-api.herokuapp.com",
 });
 
 function setHeaders(res: AxiosResponse<any>) {
