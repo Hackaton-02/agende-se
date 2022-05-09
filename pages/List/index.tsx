@@ -6,7 +6,7 @@ import { GetServerSidePropsContext } from 'next'
 const List: React.FC = () => {
   return (
     <MainComponent>
-      <Menu tab='orders' />
+      <Menu tab="orders" />
       <NoData message="Ainda não implementado" />
     </MainComponent>
   )

@@ -51,7 +51,9 @@ const changeIt: NextPage = () => {
     e.preventDefault()
     setValidated(true)
     if (!isReset) {
-      const url = process.env.FRONTEND_HOST ?? 'http://localhost:3001/change_it'
+      const url =
+        process.env.NEXT_PUBLIC_FRONTEND_HOST ??
+        'http://localhost:3001/change_it'
 
       try {
         UsersService.forgot({ email: values.email, redirect_url: url })

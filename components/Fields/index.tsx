@@ -22,7 +22,6 @@ export const Fields: any = ({
   setValues,
   disabled
 }: Fields) => {
-
   return Object.keys(fields).map((field: any, i) => {
     return !fields[field].hidden ? (
       <Col key={fields[field].label}>
@@ -44,7 +43,7 @@ export const Fields: any = ({
             {fields[field].helperText}
           </Form.Control.Feedback>
           {field === 'email' && fields[field].reset && (
-            <Link href={"/change_it"}>
+            <Link href={'/change_it'}>
               <a style={{ cursor: 'pointer' }} className="link-text">
                 Esqueci minha senha
               </a>

@@ -3,9 +3,7 @@ import Container from 'components/NewRoom'
 import MainComponent from 'components/shared/MainComponent'
 import { GetServerSidePropsContext, NextPage } from 'next'
 
-
 const New: NextPage = () => {
-
   return (
     <MainComponent>
       <Menu />

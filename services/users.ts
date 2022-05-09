@@ -41,7 +41,13 @@ interface AuthResponse {
 }
 
 const UsersService = {
-  signUp: ({ name, email, password, password_confirmation, phone }: SignUpData) =>
+  signUp: ({
+    name,
+    email,
+    password,
+    password_confirmation,
+    phone
+  }: SignUpData) =>
     api.post<void>('/auth/v1/user', {
       name,
       email,
@@ -62,7 +68,10 @@ const UsersService = {
     return api.get<UsersIndexData>(url).then(resp => resp.data)
   },
   forgot: ({ email, redirect_url }: ForgotPassword) => {
-    return api.post<AuthResponse>('/auth/v1/user/password', { email, redirect_url })
+    return api.post<AuthResponse>('/auth/v1/user/password', {
+      email,
+      redirect_url
+    })
   },
   reset: ({
     reset_password_token,

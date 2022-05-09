@@ -1,53 +1,53 @@
-import axios, { AxiosResponse } from "axios";
-import ApiData from "dtos/ApiData";
-import ApiResponseError from "dtos/ApiResponseError";
-import Cookie from "js-cookie";
-import { toast } from "react-toastify";
-import Router from "next/router";
+import axios, { AxiosResponse } from 'axios'
+import ApiData from 'dtos/ApiData'
+import ApiResponseError from 'dtos/ApiResponseError'
+import Cookie from 'js-cookie'
+import { toast } from 'react-toastify'
+import Router from 'next/router'
 
 const api = axios.create({
-  baseURL: "https://agende-se-api.herokuapp.com",
-});
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL ?? 'http://localhost:3000'
+})
 
 function setHeaders(res: AxiosResponse<any>) {
-  if (res.headers["access-token"] && res.headers["access-token"] !== "") {
+  if (res.headers['access-token'] && res.headers['access-token'] !== '') {
     const apiData: ApiData = {
-      "access-token": res.headers["access-token"],
+      'access-token': res.headers['access-token'],
       client: res.headers.client,
       expiry: Number(res.headers.expiry),
-      "token-type": res.headers["token-type"],
-      uid: res.headers.uid,
-    };
+      'token-type': res.headers['token-type'],
+      uid: res.headers.uid
+    }
 
-    (api.defaults.headers as any) = apiData;
-    Cookie.set("api-agendese", JSON.stringify(apiData));
+    ;(api.defaults.headers as any) = apiData
+    Cookie.set('api-agendese', JSON.stringify(apiData))
   }
 }
 
 api.interceptors.response.use(
-  (res) => {
-    setHeaders(res);
+  res => {
+    setHeaders(res)
 
-    return res;
+    return res
   },
-  (err) => {
+  err => {
     // caso um erro ocorra na response, um novo token é retornado, logo devemos atualizá-lo na api e nos cookies
     if (err.response) {
-      setHeaders(err.response);
+      setHeaders(err.response)
 
-      const data = err.response.data;
+      const data = err.response.data
 
       // aqui estamos tratando os erros no padrão que o rails no devolve, se existem algum array de erros, iremos extrair o nome do campo e as mensagens para que as mesmas possam ser exibidas na tela utilizando um toast
       if (data && data.errors && data.errors.fields) {
-        const errors = data.errors as ApiResponseError;
+        const errors = data.errors as ApiResponseError
 
-        const fieldsName = Object.keys(errors.fields);
+        const fieldsName = Object.keys(errors.fields)
 
-        fieldsName.forEach((error) => {
-          toast.error(error + ": " + errors.fields[error].join(`, `));
-        });
+        fieldsName.forEach(error => {
+          toast.error(error + ': ' + errors.fields[error].join(`, `))
+        })
 
-        console.log("errors", errors);
+        console.log('errors', errors)
       }
     }
 
@@ -56,32 +56,32 @@ api.interceptors.response.use(
       err.response &&
       (err.response.status === 401 || err.response.status === 403)
     ) {
-      Router.push("/");
+      Router.push('/')
     }
 
-    throw err;
+    throw err
   }
-);
+)
 
-api.interceptors.request.use((req) => {
-  req.headers = { ContentType: "application/json" };
+api.interceptors.request.use(req => {
+  req.headers = { ContentType: 'application/json' }
   if (
-    req?.url?.includes("admin") ||
-    req?.url?.includes("storefront") ||
-    req?.url?.includes("auth/v1/user") ||
-    req?.url?.includes("especialista")
+    req?.url?.includes('admin') ||
+    req?.url?.includes('storefront') ||
+    req?.url?.includes('auth/v1/user') ||
+    req?.url?.includes('especialista')
   ) {
-    const apiDataCookie = Cookie.get("api-agendese");
+    const apiDataCookie = Cookie.get('api-agendese')
 
     if (!apiDataCookie) {
-      return req;
+      return req
     }
 
-    const apiData: ApiData = JSON.parse(apiDataCookie);
-    req.headers = { ...apiData, ...req.headers };
+    const apiData: ApiData = JSON.parse(apiDataCookie)
+    req.headers = { ...apiData, ...req.headers }
   }
 
-  return req;
-});
+  return req
+})
 
-export default api;
+export default api

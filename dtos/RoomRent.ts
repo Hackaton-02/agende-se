@@ -16,4 +16,7 @@ export default interface RoomRent {
   especialization: string
 }
 
-export type Rent = Pick<RoomRent, "started_at" | "finish_at" | "payment_attributes" | "user">
+export type Rent = Pick<
+  RoomRent,
+  'started_at' | 'finish_at' | 'payment_attributes' | 'user'
+>

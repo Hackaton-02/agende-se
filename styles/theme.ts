@@ -36,8 +36,8 @@ export default {
     lightPrimary: '#9B51E0',
     blue: '#0E4DA4',
     menu: '#F0F0F0',
-    green: "#008000",
-    modalLeftBg: "#ECE9E9"
+    green: '#008000',
+    modalLeftBg: '#ECE9E9'
   },
   spacings: {
     xxsmall: '0.8rem',

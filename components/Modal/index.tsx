@@ -13,6 +13,7 @@ import AddressService from 'services/address'
 import ConsultService from 'services/consults'
 import { toast } from 'react-toastify'
 import RentService from 'services/rents'
+import { useRouter } from 'next/router'
 
 type Props = {
   isVisible: boolean
@@ -41,6 +42,8 @@ const ModalRent: React.FC<Props> = ({
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [especialization, setEspecialization] = useState('')
+
+  const router = useRouter()
 
   const onChange = (dates: any) => {
     const [checkInDate, checkOutDate] = dates
@@ -77,7 +80,8 @@ const ModalRent: React.FC<Props> = ({
         }
 
         ConsultService.create(consult)
-        toast.success('Consulta realizada com sucesso')
+          .then(() => toast.success('Consulta realizada com sucesso'))
+          .then(() => router.push('/Dashboard'))
       } catch (error) {
         console.log(error)
         toast.error('Não foi possível criar a consulta')
@@ -100,9 +104,9 @@ const ModalRent: React.FC<Props> = ({
           }
         }
 
-        RentService.create(rent).then(() =>
-          toast.success('Sala alugada com sucesso')
-        )
+        RentService.create(rent)
+          .then(() => toast.success('Sala alugada com sucesso'))
+          .then(() => router.push('/Dashboard'))
       } catch (error) {
         console.log(error)
         toast.error('Não foi possível alugar essa sala no momento')
