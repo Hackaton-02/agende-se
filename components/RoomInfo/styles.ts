@@ -36,7 +36,7 @@ export const Description = styled.p`
     margin-top: 10rem;
     ${media.greaterThan('medium')`
       max-width: 58rem;
-      margin-top: inherit;
+      margin-top: 5rem;
     `}
   `}
 `
