@@ -72,6 +72,7 @@ const RoomContainer: React.FC = () => {
           <Form.Control
             type="number"
             required
+            min={0}
             value={newRoom.price}
             onChange={e => {
               setNewRoom({ ...newRoom, price: e.target.value })
