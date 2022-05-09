@@ -1,18 +1,16 @@
-import Room from "dtos/Room";
-import * as S from "./styles"
+import Room from 'dtos/Room'
+import * as S from './styles'
 
 type Props = {
   room: Room
 }
 
 const RoomFeatures = ({ room }: Props) => {
-
   const internet = room.features?.internet ?? false
   const bathroom = room.features?.bathroom ?? false
   const airConditioned = room.features?.airConditioned ?? false
   const furnished = room.features?.furnished ?? false
   const roomCleaning = room.features?.roomCleaning ?? false
-
 
   return (
     <S.Wrapper>
@@ -49,9 +47,7 @@ const RoomFeatures = ({ room }: Props) => {
         <div className="room-feature">
           <i
             className={
-              furnished
-                ? 'fa fa-check text-success'
-                : 'fa fa-times text-danger'
+              furnished ? 'fa fa-check text-success' : 'fa fa-times text-danger'
             }
             aria-hidden={true}
           ></i>
@@ -77,7 +73,6 @@ const RoomFeatures = ({ room }: Props) => {
           ></i>
           <p>Serviços de limpeza</p>
         </div>
-
       </div>
     </S.Wrapper>
   )

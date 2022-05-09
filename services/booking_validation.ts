@@ -1,5 +1,4 @@
-import api from './api';
-
+import api from './api'
 
 interface BookingIndexData {
   range: [Date]
@@ -7,8 +6,8 @@ interface BookingIndexData {
 
 const BookingValidationService = {
   index(url: string) {
-    return api.get<BookingIndexData>(url).then(resp => resp.data);
+    return api.get<BookingIndexData>(url).then(resp => resp.data)
   }
 }
 
-export default BookingValidationService;
+export default BookingValidationService

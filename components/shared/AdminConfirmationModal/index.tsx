@@ -4,7 +4,7 @@ import * as S from './styles'
 
 interface AdminDeleteModalProps {
   show: boolean
-  handleClose: (success?: boolean | "close") => void
+  handleClose: (success?: boolean | 'close') => void
   target: String
   type: boolean
 }
@@ -41,7 +41,7 @@ const AdminConfirmation: React.FC<AdminDeleteModalProps> = ({
               </Col>
 
               <Col lg={6} xs>
-                <div onClick={() => handleClose("close")}>
+                <div onClick={() => handleClose('close')}>
                   <StyledButton
                     icon={'fa fa-times'}
                     action={'Cancelar'}

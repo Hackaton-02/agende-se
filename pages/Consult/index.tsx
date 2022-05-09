@@ -6,7 +6,7 @@ import { GetServerSidePropsContext } from 'next'
 const Consult: React.FC = () => {
   return (
     <MainComponent>
-      <Menu tab='my_consults' />
+      <Menu tab="my_consults" />
       <NoData message="Ainda não implementado" />
     </MainComponent>
   )
